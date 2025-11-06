@@ -64,7 +64,7 @@ function Header({ isMenuOpen, toggleMenu }) {
       <header>
         {/* 'e.preventdefault()' evita que el '#' recargue la pagina */}
         <a href="#" onClick={(e) => { e.preventDefault(); handleLinkClick('/'); }}>
-          <h1 className={styles.logo}><Joystick /> Level-up gamer</h1>
+          <h1 className={styles.logo}><Joystick /> Level-up Gamer</h1>
         </a>
         <img className={styles.logojpg} src="/img/logo.jpg" alt="logo level-up gamer" />
       </header>
