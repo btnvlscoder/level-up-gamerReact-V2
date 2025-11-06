@@ -1,40 +1,46 @@
-/* Contenido de: src/components/ProductCard.module.css */
+/*
+   estilos para ProductCard.jsx
+*/
 
+/* '.product' es el contenedor de la tarjeta */
 .product {
   background-color: var(--clr-main);
   border-radius: 1rem;
-  overflow: hidden;
+  overflow: hidden; /* asegura que la imagen respete el borde redondeado */
   transition: transform 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  height: 100%;
+  height: 100%; /* asegura que todas las tarjetas tengan la misma altura (en un grid) */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* apila la imagen y los detalles verticalmente */
 }
 
 .productImg {
   width: 100%;
   height: 250px;
-  object-fit: contain;
+  object-fit: contain; /* asegura que la imagen se vea completa, sin distorsion */
   background: #111;
   display: block;
   transition: transform 0.3s ease;
   padding: 0.5rem;
 }
 
+/* efecto de zoom al pasar el mouse sobre la tarjeta */
 .product:hover .productImg {
   transform: scale(1.05);
 }
 
+/* '.productdetails' es el contenedor para el texto (nombre, precio, etc.) */
 .productDetails {
   background-color: var(--clr-main);
   color: var(--clr-gray);
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 1; /* hace que esta seccion crezca para llenar el espacio (height: 100%) */
   gap: .5rem;
 }
 
+/* marca (ej. "devir") */
 .productSignature {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -43,14 +49,16 @@
   margin: 0;
 }
 
+/* nombre del producto */
 .productTitle {
   font-size: 1rem;
   margin: 0;
-  height: 2.5rem; 
+  height: 2.5rem; /* altura fija para alinear titulos entre tarjetas */
   overflow: hidden;
-  flex-grow: 1; 
+  flex-grow: 1; /* ocupa el espacio vertical disponible */
 }
 
+/* estilos especificos para el <a> dentro del titulo */
 .productTitle a {
   font-family: 'Orbitron', sans-serif; 
   color: var(--clr-accent-green);     
@@ -63,17 +71,19 @@
 }
 
 
-/* --- ESTA ES LA CORRECCIÓN --- */
+/* precio del producto */
 .price {
-  font-family: 'Orbitron', sans-serif; /* <-- Arregla la fuente */
-  color: var(--clr-accent-blue);     /* <-- Arregla el color */
+  font-family: 'Orbitron', sans-serif;
+  color: var(--clr-accent-blue);
   font-size: 1.25rem;
   font-weight: 700;
+  /* 'margin-top: auto' es un truco de flexbox que empuja el precio
+     (y el boton de abajo) al fondo de la tarjeta.
+  */
   margin-top: auto; 
 }
-/* --- FIN DE LA CORRECCIÓN --- */
 
-
+/* boton "agregar" */
 .productAdd {
   border: 0;
   background-color: var(--clr-accent-blue);

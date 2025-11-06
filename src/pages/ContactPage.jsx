@@ -1,23 +1,35 @@
-// Contenido de: src/pages/ContactPage.jsx (Refactorizado con CSS Modules)
-
 import React, { useState } from 'react';
 import { Envelope, Telephone } from 'react-bootstrap-icons';
 import toast from 'react-hot-toast';
 
-// 1. Importar los estilos del módulo
+// importamos los estilos modulares (ContactPage.module.css)
 import styles from './ContactPage.module.css';
 
+/**
+ * pagina de contacto.
+ * renderiza un formulario de contacto controlado y la informacion de la tienda.
+ */
 export default function ContactPage() {
+  // estados para los campos del formulario (formulario controlado)
   const [nombre, setNombre] = useState('');
   const [correo, setCorreo] = useState('');
   const [asunto, setAsunto] = useState('');
   const [mensaje, setMensaje] = useState('');
 
+  /**
+   * manejador para el envio (submit) del formulario.
+   * @param {object} e - el evento del formulario
+   */
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault(); // previene la recarga de la pagina
+    
+    // por ahora, solo simulamos el envio mostrando en consola
     console.log("Formulario enviado:", { nombre, correo, asunto, mensaje });
-    toast.success('Mensaje enviado con éxito! Te contactaremos pronto.', { duration: 3000 });
 
+    // muestra notificacion de exito
+    toast.success('Mensaje enviado con exito! Te contactaremos pronto.', { duration: 3000 });
+
+    // limpia el formulario reseteando los estados
     setNombre('');
     setCorreo('');
     setAsunto('');
@@ -26,27 +38,28 @@ export default function ContactPage() {
 
   return (
     <>
-      {/* 2. Título global */ }
-      <h2 className="titulo-principal">Contáctanos</h2>
+      {/* '.titulo-principal' es una clase global de style.css */}
+      <h2 className="titulo-principal">Contactanos</h2>
 
-      {/* 3. Usar el objeto 'styles' */ }
+      {/* usamos la clase del modulo para el grid principal */}
       <div className={styles.contactoSimple}>
         
+        {/* formulario (columna izquierda) */}
         <form className={styles.contactoFormSimple} onSubmit={handleSubmit}>
           
           <div className={styles.txtFormulario}>
-            <label htmlFor="nombre">Nombre completo</label>
+            <label htmlFor="nombre">Nombre Completo</label>
             <input 
               type="text" 
               id="nombre" 
               required 
-              value={nombre} 
-              onChange={(e) => setNombre(e.target.value)} 
+              value={nombre} // controlado por el estado
+              onChange={(e) => setNombre(e.target.value)} // actualiza el estado
             />
           </div>
           
           <div className={styles.txtFormulario}>
-            <label htmlFor="correo">Correo electrónico</label>
+            <label htmlFor="correo">Correo electronico</label>
             <input 
               type="email" 
               id="correo" 
@@ -81,8 +94,9 @@ export default function ContactPage() {
           <button type="submit" className={styles.btnEnviar}>Enviar mensaje</button>
         </form>
         
+        {/* informacion (columna derecha) */}
         <div className={styles.contactoInfo}>
-          <h3>Información de contacto</h3>
+          <h3>Informacion de contacto</h3>
           <p><Envelope /> contacto@levelupgamer.cl</p>
           <p><Telephone /> +56 9 4129 5631</p>
         </div>

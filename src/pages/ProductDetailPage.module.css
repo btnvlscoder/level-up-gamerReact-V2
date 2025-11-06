@@ -1,5 +1,8 @@
-/* Contenido de: src/pages/ProductDetailPage.module.css */
+/*
+   estilos para ProductDetailPage.jsx
+*/
 
+/* contenedor principal de toda la pagina de detalle */
 .productoDetalleContainer {
   padding: 2rem;
   background-color: var(--clr-main-light);
@@ -7,6 +10,7 @@
   margin-bottom: 2rem;
 }
 
+/* el contenedor que usa flexbox para poner el slider (izquierda) y la info (derecha) */
 .productoDetalle {
   display: flex;
   gap: 3rem;
@@ -18,9 +22,13 @@
   border: 2px solid var(--clr-accent-blue);
 }
 
-/* SLIDER Y MINIATURAS */
+/*
+   slider y miniaturas
+*/
+
+/* contenedor de la galeria de imagenes (slider + botones + miniaturas) */
 .productoSlider {
-  position: relative;
+  position: relative; /* para posicionar los botones 'prev' y 'next' */
   width: 50%;
   min-width: 300px;
   overflow: hidden;
@@ -29,6 +37,7 @@
   padding: 1rem;
 }
 
+/* el marco negro donde se muestra la imagen principal */
 .sliderContainer {
   width: 100%;
   height: 400px;
@@ -40,21 +49,19 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+/* la imagen principal dentro del slider */
 .sliderImg {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  object-fit: contain; /* asegura que la imagen se vea completa sin distorsionarse */
   display: block; 
   border-radius: 0.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-.sliderImg.active {
-  display: block; 
-}
-
+/* estilo para los botones de flecha (prev/next) */
 .sliderBtn {
-  position: absolute;
+  position: absolute; /* posicionados sobre el '.productoslider' */
   top: 50%;
   transform: translateY(-50%);
   background: rgba(30, 144, 255, 0.8);
@@ -82,11 +89,11 @@
 .sliderBtn.prev { 
   left: 15px; 
 }
-
 .sliderBtn.next { 
   right: 15px; 
 }
 
+/* contenedor para las imagenes pequenas (miniaturas) */
 .miniaturasContainer {
   display: flex;
   gap: 0.5rem;
@@ -95,10 +102,11 @@
   flex-wrap: wrap;
 }
 
+/* estilo para cada imagen miniatura */
 .miniatura {
   width: 60px;
   height: 60px;
-  object-fit: cover;
+  object-fit: cover; /* corta la imagen para que llene el espacio */
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -110,19 +118,24 @@
   border-color: var(--clr-accent-blue);
 }
 
+/* clase 'active' para la miniatura que esta seleccionada */
 .miniatura.active {
   border-color: var(--clr-accent-green);
   transform: scale(1.1);
 }
 
-/* INFO DETALLE */
+/*
+   info detalle
+*/
+
+/* contenedor de la informacion del producto (columna derecha) */
 .productoInfo {
-  flex: 1;
+  flex: 1; /* ocupa el espacio restante */
   color: var(--clr-white);
   padding: 1rem;
 }
 
-/* Títulos y texto específicos de esta página */
+/* estilos especificos para el texto en esta pagina */
 .productoTituloDetalle {
   font-size: 2.2rem;
   color: var(--clr-accent-green);
@@ -140,7 +153,7 @@
   margin-bottom: 0.25rem;
 }
 
-
+/* caja de descripcion con borde izquierdo azul */
 .productoDescripcion {
   color: var(--clr-gray);
   font-size: 1rem;
@@ -161,6 +174,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+/* contenedor para los botones (agregar al carrito, volver) */
 .accionesBotones {
   display: flex;
   flex-wrap: wrap; 
@@ -168,10 +182,7 @@
   margin-top: 1.5rem;
 }
 
-/* ESTILO AÑADIDO (FIX): 
-   El botón 'producto-agregar' no tenía estilo.
-   Lo creamos aquí, basándonos en '.product-add'.
-*/
+/* estilo para el boton "agregar al carrito" especifico de esta pagina */
 .productoAgregar {
   border: 0;
   background-color: var(--clr-accent-blue);
@@ -194,8 +205,11 @@
 }
 
 
-/* --- Media Queries --- */
+/*
+   responsive
+*/
 @media (max-width: 968px) {
+  /* en tablets, el layout pasa de 2 columnas (flex) a 1 (column) */
   .productoDetalle {
     flex-direction: column;
     gap: 2rem;
@@ -207,14 +221,16 @@
 }
 
 @media (max-width: 600px) {
+  /* en movil, los botones se apilan verticalmente */
   .accionesBotones {
     flex-direction: column;
   }
   
-  /* El botón de volver (global) y el de agregar (local)
-     ocupan el 100% en móvil */
+  /* ':global(.btn-volver)' permite aplicar estilos a una clase global (de style.css)
+     desde dentro de un modulo css.
+  */
   .productoAgregar,
-  :global(.btn-volver) { /* :global() para estilizar una clase que NO es de este módulo */
+  :global(.btn-volver) {
     width: 100%;
     justify-content: center;
   }

@@ -1,5 +1,8 @@
-/* Contenido de: src/pages/ProfilePage.module.css */
+/*
+   estilos para profilePage.jsx
+*/
 
+/* '.profilepage' es el contenedor principal de la pagina de perfil */
 .profilePage {
   max-width: 700px;
   margin: 2rem auto;
@@ -11,6 +14,7 @@
   color: var(--clr-white);
 }
 
+/* '.profileheader' es la seccion superior con el icono y datos del usuario */
 .profileHeader {
   display: flex;
   align-items: center;
@@ -38,13 +42,15 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* estilo general para los parrafos de informacion */
 .profileInfo p {
   font-size: 1.1rem;
-  color: var(--clr-gray); /* <-- Este es el estilo problemático */
+  color: var(--clr-gray);
   line-height: 1.6;
   font-family: 'Roboto', sans-serif;
 }
 
+/* '.discountbanner' es el estilo base para los banners de descuento */
 .discountBanner {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -53,12 +59,14 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* modificador para el banner de descuento 'duoc' (fondo claro) */
 .discountBanner.duoc {
   background-color: #f0fdf4;
   border: 1px solid var(--clr-accent-green);
-  color: #222; /* El color base del banner */
+  color: #222; /* color de texto oscuro por defecto para este banner */
 }
 
+/* modificador para el banner 'no duoc' (fondo oscuro) */
 .discountBanner.noDuoc {
   background-color: var(--clr-main-light); 
   border: 1px solid #facc15;
@@ -80,17 +88,16 @@
   margin-bottom: 0.5rem;
 }
 
-/* --- ESTA ES LA CORRECCIÓN --- */
-/* Esta regla es más específica y anula a '.profileInfo p',
-  haciendo que el párrafo dentro del banner duoc sea oscuro.
+/* esta regla asegura que el parrafo dentro del banner .duoc
+   sea oscuro, sobrescribiendo la regla general de '.profileinfo p'
 */
 .discountBanner.duoc p {
-  color: #222; /* <-- Color de texto oscuro (negro) */
-  font-size: 1rem; /* Opcional: ajusta el tamaño si es necesario */
+  color: #222; /* color de texto oscuro (negro) */
+  font-size: 1rem; 
 }
-/* --- FIN DE LA CORRECCIÓN --- */
 
 
+/* estilos para el boton de cerrar sesion */
 .profileLogoutButton {
   display: block; 
   margin: 2rem auto 0 auto; 
@@ -115,7 +122,7 @@
   transform: translateY(-2px);
 }
 
-/* Responsivo para el contenedor de Perfil */
+/* responsivo para el contenedor de perfil */
 @media (max-width: 600px) {
   .profilePage {
     margin: 1rem 0.5rem;

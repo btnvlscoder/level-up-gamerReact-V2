@@ -1,5 +1,8 @@
-/* Contenido de: src/pages/ContactPage.module.css */
+/*
+   estilos para ContactPage.jsx
+*/
 
+/* '.contactosimple' es el grid principal (formulario a la izquierda, info a la derecha) */
 .contactoSimple {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -8,6 +11,7 @@
   margin: 0 auto;
 }
 
+/* '.contactoinfo' es la columna de la derecha (info de contacto) */
 .contactoInfo {
   background-color: rgba(20, 20, 25, 0.8);
   padding: 2rem;
@@ -34,16 +38,18 @@
   font-size: 1.2rem;
 }
 
-/* Estilos del formulario */
+/* estilos del formulario (columna izquierda) 
+*/
 .contactoFormSimple {
   display: flex;
   flex-direction: column;
 }
 
+/* '.txtformulario' es el wrapper para cada par de label/input */
 .txtFormulario {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem; /* Añadimos espacio entre campos */
+  margin-bottom: 1rem; /* espacio entre campos */
 }
 
 .txtFormulario label {
@@ -68,6 +74,7 @@
   min-height: 150px;
 }
 
+/* boton de enviar */
 .btnEnviar{
   border: 0;
   background-color: var(--clr-accent-blue);
@@ -80,7 +87,7 @@
   font-size: 0.9rem;
   margin-top: 1.5rem;
   width: 50%;
-  align-self: center; /* Centrado en el grid */
+  align-self: center; /* centrado en el grid */
 }
 
 .btnEnviar:hover {
@@ -88,8 +95,10 @@
   color: var(--clr-main);
 }
 
-/* Media Query */
+/* responsive 
+*/
 @media (max-width: 600px) {
+  /* en movil, el grid pasa a ser de 1 columna (apilado) */
   .contactoSimple {
     grid-template-columns: 1fr;
   }

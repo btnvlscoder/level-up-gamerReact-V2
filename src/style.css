@@ -1,6 +1,6 @@
-/* =============================================
-   GLOBALES Y VARIABLES
-   ============================================= */
+/*
+   globales y variables
+*/
 :root {
   --clr-main: #000000;
   --clr-main-light: #0c0c0c;
@@ -11,9 +11,10 @@
   --clr-accent-red: #FF3333;
 }
 
-/* =============================================
-   RESETS DE TIPOGRAFÍA Y BASE
-   ============================================= */
+/*
+   resets de tipografia y base
+*/
+
 /* reset universal */
 * {
   margin: 0;
@@ -21,14 +22,14 @@
   box-sizing: border-box;
 }
 
-/* reset clave: fondo oscuro y sin márgenes */
+/* reset clave: fondo oscuro y sin margenes */
 body, html {
   margin: 0;
   padding: 0;
   background-color: var(--clr-main); 
 }
 
-/* Aplicar Orbitron a los TITULOS */
+/* aplicar orbitron a los titulos */
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
@@ -36,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--clr-white); 
 }
 
-/* Aplicar Roboto al resto del texto */
+/* aplicar roboto al resto del texto */
 p, a, input, textarea, ul, button {
   margin: 0;
   padding: 0;
@@ -51,15 +52,18 @@ a {
   text-decoration: none;
 }
 
-/* =============================================
-   LAYOUT PRINCIPAL (MainLayout.jsx)
-   ============================================= */
+/*
+   layout principal (mainLayout.jsx)
+*/
 .wrapper {
   display: grid;
   grid-template-columns: 18rem 1fr;
   background-color: var(--clr-main);
 }
 
+/* nota: el 'aside' es estilizado en header.module.css, 
+   pero 'main' y el layout responsivo se quedan aqui.
+*/
 main {
   background-color: var(--clr-main-light);
   margin: 1rem;
@@ -69,9 +73,9 @@ main {
   position: relative; 
 }
 
-/* =============================================
-   MENU MÓVIL (MainLayout.jsx)
-   ============================================= */
+/*
+   menu movil (mainLayout.jsx)
+*/
 .btn-menu-toggle {
   display: none;
   position: fixed; 
@@ -102,9 +106,11 @@ main {
   z-index: 99; 
 }
 
-/* =============================================
-   CLASES DE UTILIDAD GLOBALES
-   ============================================= */
+/*
+   clases de utilidad globales
+*/
+
+/* --- titulo principal (usado en todas las paginas) --- */
 .titulo-principal {
   text-align: center;
   font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
@@ -130,6 +136,7 @@ main {
   to { width: 60px; opacity: 1; }
 }
 
+/* --- botones globales (usados en voucher y detalle) --- */
 .btn-imprimir, .btn-volver {
   padding: 0.7rem 1.5rem;
   border: none;
@@ -171,9 +178,11 @@ main {
   box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
 }
 
-/* =============================================
-   PÁGINAS NO REFACTORIZADAS (HomePage.jsx)
-   ============================================= */
+/*
+   paginas no refactorizadas (homePage.jsx)
+*/
+
+/* --- textos generales (usados en home) --- */
 .small-text-vision,
 .small-text-mision {
   font-size: 1rem;
@@ -183,6 +192,7 @@ main {
   color: var(--clr-gray);
 }
 
+/* --- estilos de home --- */
 .inicio-section {
   background-color: var(--clr-main); 
   padding: 2rem;
@@ -222,6 +232,7 @@ main {
   margin-bottom: 2rem; 
 }
 
+/* --- estilos de la imagen de tienda (homePage) --- */
 .imagen-tienda-box {
   display: flex; 
   justify-content: center; 
@@ -236,19 +247,25 @@ main {
   overflow: hidden; 
 }
 
+/* --- estilos del logo en la caja "desafia" (homePage) --- */
 .logo-mensaje-principal {
   border-radius: 2rem; 
   overflow: hidden;
   margin: 1rem auto; 
 }
 
-/* =============================================
-   RESPONSIVE GLOBAL (MainLayout.jsx)
-   ============================================= */
+/*
+   responsive global (mainLayout.jsx)
+*/
 @media (max-width: 968px) {
   .wrapper {
     grid-template-columns: 1fr;
   }
+  
+  /* nota: 'aside' es controlado por header.module.css, 
+     pero 'main', 'btn-menu-toggle' y 'overlay' 
+     son controlados aqui.
+  */
   
   main {
     margin: 1rem;

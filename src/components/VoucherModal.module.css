@@ -1,8 +1,10 @@
-/* Contenido de: src/components/VoucherModal.module.css */
+/*
+   estilos para VoucherModal.jsx
+*/
 
-/* Estilo del fondo/overlay del modal */
+/* '.vouchersimple' es el overlay/fondo oscuro del modal */
 .voucherSimple {
-  position: fixed;
+  position: fixed; /* se superpone a toda la pagina */
   top: 0;
   left: 0;
   width: 100%;
@@ -15,10 +17,10 @@
   padding: 1rem;
 }
 
-/* Contenedor blanco del voucher */
+/* '.vouchercontent' es la caja blanca del modal */
 .voucherContent {
   background-color: white;
-  color: #333;
+  color: #333; /* texto oscuro sobre fondo blanco */
   padding: 2rem;
   border-radius: 0.5rem;
   max-width: 400px;
@@ -33,6 +35,7 @@
   font-size: 1.5rem;
 }
 
+/* '.voucherdetails' es la caja gris clara con el resumen */
 .voucherDetails {
   text-align: left;
   margin-bottom: 1.5rem;
@@ -41,6 +44,7 @@
   border-radius: 0.5rem;
 }
 
+/* estilo para cada item (ej. "catan (x1) ... $29.990") */
 .voucherItem {
   display: flex;
   justify-content: space-between;
@@ -49,7 +53,9 @@
   border-bottom: 1px solid #eee;
 }
 
-/* Estilos para el formulario de email */
+/*
+   formulario de email
+*/
 .voucherEmailForm {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
@@ -67,9 +73,10 @@
   border-radius: 0.5rem;
   border: 1px solid #ccc;
   margin-bottom: 1rem;
-  box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
+  box-sizing: border-box; /* asegura que el padding no rompa el ancho */
 }
 
+/* caja verde de "email enviado" */
 .emailSuccessMessage {
   padding: 1rem;
   background-color: #f0fdf4;
@@ -84,7 +91,9 @@
   margin-right: 0.5rem;
 }
 
-/* Resumen de totales dentro del voucher */
+/*
+   resumen de totales
+*/
 .voucherTotalSummary {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -103,6 +112,7 @@
   font-weight: 700;
 }
 
+/* linea de total final */
 .voucherTotal {
   font-size: 1.2rem;
   font-weight: bold;
@@ -114,6 +124,7 @@
   justify-content: space-between;
 }
 
+/* contenedor de los botones de accion (volver) */
 .voucherActions {
   display: flex;
   justify-content: center;
@@ -121,9 +132,11 @@
   margin-top: 1.5rem;
 }
 
-/* Estilos de Impresión */
+/*
+   estilos de impresion
+*/
 @media print {
-  /* :global() se usa para seleccionar elementos fuera del módulo, como 'body' */
+  /* ':global(body) *' oculta todo en la pagina excepto el voucher */
   :global(body) * {
     visibility: hidden;
   }
@@ -132,6 +145,7 @@
     visibility: visible;
   }
   
+  /* resetea la posicion del voucher para la impresion */
   .voucherSimple {
     position: absolute;
     left: 0;
@@ -141,7 +155,7 @@
     z-index: 9999;
   }
   
-  /* Ocultar botones en la impresión */
+  /* oculta los botones y el formulario al imprimir */
   .voucherActions, .voucherEmailForm {
     display: none;
   }

@@ -1,15 +1,19 @@
-// CATALOGO DE PRODUCTO
+/*
+   catalogo de productos
+   este archivo actua como una "base de datos" temporal para la aplicacion.
+   exporta un array de objetos, donde cada objeto representa un producto.
+*/
  const products= [
     {
-      code: "JM001",
-      category: "Juegos de Mesa",
-      signature: "DEVIR",
-      name: "Catan",
-      price: 29990,
+      code: "JM001", // codigo unico del producto
+      category: "Juegos de Mesa", // categoria para filtros
+      signature: "DEVIR", // marca del producto
+      name: "Catan", // nombre del producto
+      price: 29990, // precio en clp (numero entero)
       description: 
-        "Un clásico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de Catan.",
-      img: [
-        "/img/productos/catan/1.jpg",
+        "un clasico juego de estrategia donde los jugadores compiten por colonizar y expandirse en la isla de catan.",
+      img: [ // array de rutas a las imagenes del producto
+        "/img/productos/catan/1.jpg", // la primera imagen (indice 0) se usa como miniatura
         "/img/productos/catan/2.jpg",
         "/img/productos/catan/3.jpg"
       ]
@@ -20,7 +24,7 @@
       signature: "DEVIR",
       name: "Carcassonne",
       price: 24990,
-      description: "Juego de colocación de fichas donde los jugadores construyen el paisaje medieval de Carcassonne.",
+      description: "Juego de colocacion de fichas donde los jugadores construyen el paisaje medieval de carcassonne.",
       img: [
         "/img/productos/carcassonne/1.jpg",
         "/img/productos/carcassonne/2.jpg",
@@ -31,9 +35,9 @@
       code: "AC001",
       category: "Accesorios",
       signature: "MICROSOFT",
-      name: "Controlador Inalámbrico Xbox Series X",
+      name: "Controlador Inalambrico Xbox Series X",
       price: 59990,
-      description: "Experiencia de juego cómoda con botones mapeables y respuesta táctil mejorada.",
+      description: "Experiencia de juego comoda con botones mapeables y respuesta tactil mejorada.",
       img: [
         "/img/productos/Controlador-Inalámbrico-Xbox-Series-X/1.jpg",
         "/img/productos/Controlador-Inalámbrico-Xbox-Series-X/2.jpg",
@@ -48,7 +52,7 @@
       signature: "HYPERX",
       name: "Auriculares Gamer HyperX Cloud II",
       price: 79990,
-      description: "Sonido envolvente de calidad con micrófono desmontable y almohadillas ultra cómodas.",
+      description: "sonido envolvente de calidad con microfono desmontable y almohadillas ultra comodas.",
       img: [
         "/img/productos/Auriculares-Gaming-HyperX/1.jpg",
         "/img/productos/Auriculares-Gaming-HyperX/2.jpg",
@@ -62,7 +66,7 @@
       signature: "SONY",
       name: "PlayStation 5",
       price: 549990,
-      description: "Consola de última generación de Sony con gráficos impresionantes y carga ultrarrápida.",
+      description: "consola de ultima generacion de sony con graficos impresionantes y carga ultrarrapida.",
       img: [
         "/img/productos/PlayStation-5/1.jpg",
         "/img/productos/PlayStation-5/2.jpg",
@@ -76,7 +80,7 @@
       signature: "ASUS",
       name: "PC Gamer ASUS ROG Strix",
       price: 1299990,
-      description: "Potente equipo diseñado para gamers exigentes, con rendimiento excepcional en cualquier juego.",
+      description: "potente equipo disenado para gamers exigentes, con rendimiento excepcional en cualquier juego.",
       img: [
         "/img/productos/PC-Gamer-ASUS-ROG-Strix/1.jpg",
         "/img/productos/PC-Gamer-ASUS-ROG-Strix/2.jpg",
@@ -90,7 +94,7 @@
       signature: "SECRETLAB",
       name: "Silla Gamer Secretlab Titan",
       price: 349990,
-      description: "Máximo confort y soporte ergonómico para sesiones largas de juego.",
+      description: "maximo confort y soporte ergonomico para sesiones largas de juego.",
       img: [
         "/img/productos/Silla-GamerSecretlab-Titan/1.jpg",
         "/img/productos/Silla-GamerSecretlab-Titan/2.jpg",
@@ -109,7 +113,7 @@
       signature: "LOGITECH",
       name: "Mouse Gamer Logitech G502 HERO",
       price: 49990,
-      description: "Sensor de alta precisión y botones personalizables para un control preciso.",
+      description: "sensor de alta precision y botones personalizables para un control preciso.",
       img: [
         "/img/productos/Mouse-Gamer-Logitech-G502-HERO/1.jpg",
         "/img/productos/Mouse-Gamer-Logitech-G502-HERO/2.jpg",
@@ -123,7 +127,7 @@
       signature: "RAZER",
       name: "Mousepad Razer Goliathus Extended Chroma",
       price: 29990,
-      description: "Área amplia de juego con iluminación RGB personalizable.",
+      description: "area amplia de juego con iluminacion rgb personalizable.",
       img: [
         "/img/productos/Mousepad-Razer-Goliathus-Extended-Chroma/1.jpg",
         "/img/productos/Mousepad-Razer-Goliathus-Extended-Chroma/2.jpg",
@@ -136,7 +140,7 @@
       signature: "LEVEL-UP",
       name: "Polera Gamer Personalizada 'Level-Up'",
       price: 14990,
-      description: "Camiseta cómoda y estilizada, personalizable con tu gamer tag o diseño favorito.",
+      description: "camiseta comoda y estilizada, personalizable con tu gamer tag o diseno favorito.",
       img: [
         "/img/productos/Poleras-Personalizadas/1.png",
         "/img/productos/Poleras-Personalizadas/2.png",
@@ -145,4 +149,6 @@
     }
 ]
 
+// 'export default' hace que este array sea el valor principal importado
+// desde otros archivos (ej. en productsPage.jsx).
 export default products;

@@ -1,5 +1,8 @@
-/* Contenido de: src/pages/Auth.module.css */
+/*
+   estilos para LoginPage.jsx y RegisterPage.jsx
+*/
 
+/* '.authcontainer' es la caja principal que centra el formulario */
 .authContainer {
   max-width: 500px;
   margin: 2rem auto;
@@ -11,6 +14,7 @@
   border-radius: 1rem;
 }
 
+/* '.formgroup' es el wrapper para un par de label/input */
 .authForm .formGroup {
   margin-bottom: 1.5rem;
 }
@@ -35,6 +39,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* '.autherror' es el contenedor del mensaje de error (ej. "contrasena incorrecta") */
 .authError {
   color: var(--clr-accent-red) !important;
   font-family: 'Roboto', sans-serif;
@@ -46,6 +51,7 @@
   text-align: center;
 }
 
+/* '.authbutton' es el boton principal (entrar/registrarse) */
 .authButton {
   background-color: var(--clr-accent-green);
   color: var(--clr-main);
@@ -64,6 +70,7 @@
   background-color: #2fb913; 
 }
 
+/* '.authswitchlink' es el texto de abajo (ej. "¿no tienes cuenta? registrate") */
 .authSwitchLink {
   text-align: center;
   color: var(--clr-gray);
@@ -76,7 +83,7 @@
   text-decoration: underline;
 }
 
-/* Responsivo para el contenedor de Auth */
+/* responsivo para el contenedor de auth */
 @media (max-width: 600px) {
   .authContainer {
     margin: 1rem 0.5rem;
