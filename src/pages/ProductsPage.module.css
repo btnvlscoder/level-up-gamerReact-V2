@@ -1,0 +1,78 @@
+/* Contenido de: src/pages/ProductsPage.module.css */
+
+.productosToolbar {
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  margin-bottom:1.5rem;
+}
+
+.buscador {
+  flex:1;
+  padding:.6rem;
+  border-radius:.5rem;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--clr-white);
+  border: 1px solid var(--clr-accent-blue);
+}
+
+.filtroCategoria {
+  padding:.5rem;
+  border-radius:.5rem;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--clr-white);
+  border: 1px solid var(--clr-accent-blue);
+}
+
+.filtroCategoria option {
+  background-color: var(--clr-main-light);
+  color: var(--clr-white);
+}
+
+.noResultados {
+  background-color: var(--clr-main);
+  border: 1px solid var(--clr-accent-blue);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--clr-accent-green);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  max-width: 600px;
+}
+
+.noResultados i {
+  color: var(--clr-accent-blue);
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+}
+
+/* El contenedor de las tarjetas ahora pertenece a esta página */
+.contenedorProductos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+
+/* Media queries para el contenedor */
+@media (max-width: 1200px) {
+  .contenedorProductos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .contenedorProductos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .contenedorProductos {
+    grid-template-columns: 1fr;
+  }
+}

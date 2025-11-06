@@ -1,0 +1,221 @@
+/* Contenido de: src/pages/ProductDetailPage.module.css */
+
+.productoDetalleContainer {
+  padding: 2rem;
+  background-color: var(--clr-main-light);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.productoDetalle {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  background-color: rgba(20, 20, 25, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--clr-accent-blue);
+}
+
+/* SLIDER Y MINIATURAS */
+.productoSlider {
+  position: relative;
+  width: 50%;
+  min-width: 300px;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+}
+
+.sliderContainer {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sliderImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block; 
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.sliderImg.active {
+  display: block; 
+}
+
+.sliderBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 144, 255, 0.8);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.8rem;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.sliderBtn:hover {
+  background: var(--clr-accent-blue);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sliderBtn.prev { 
+  left: 15px; 
+}
+
+.sliderBtn.next { 
+  right: 15px; 
+}
+
+.miniaturasContainer {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.miniatura {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.miniatura:hover {
+  transform: scale(1.1);
+  border-color: var(--clr-accent-blue);
+}
+
+.miniatura.active {
+  border-color: var(--clr-accent-green);
+  transform: scale(1.1);
+}
+
+/* INFO DETALLE */
+.productoInfo {
+  flex: 1;
+  color: var(--clr-white);
+  padding: 1rem;
+}
+
+/* Títulos y texto específicos de esta página */
+.productoTituloDetalle {
+  font-size: 2.2rem;
+  color: var(--clr-accent-green);
+  margin-bottom: 0.5rem;
+}
+.productoMarcaDetalle {
+  font-size: 1rem;
+  color: var(--clr-gray);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.productoCodigo, .productoCategoria {
+  font-size: 0.9rem;
+  color: var(--clr-gray);
+  margin-bottom: 0.25rem;
+}
+
+
+.productoDescripcion {
+  color: var(--clr-gray);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+  font-family: 'Roboto', sans-serif;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--clr-accent-blue);
+}
+
+.productoPrecio {
+  font-size: 2rem;
+  color: var(--clr-accent-green);
+  margin: 1.5rem 0;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.accionesBotones {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ESTILO AÑADIDO (FIX): 
+   El botón 'producto-agregar' no tenía estilo.
+   Lo creamos aquí, basándonos en '.product-add'.
+*/
+.productoAgregar {
+  border: 0;
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-gray);
+  padding: .75rem 1.5rem;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color .3s, color .3s;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.productoAgregar:hover {
+  background-color: var(--clr-accent-green);
+  color: var(--clr-main);
+}
+
+
+/* --- Media Queries --- */
+@media (max-width: 968px) {
+  .productoDetalle {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .productoSlider {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .accionesBotones {
+    flex-direction: column;
+  }
+  
+  /* El botón de volver (global) y el de agregar (local)
+     ocupan el 100% en móvil */
+  .productoAgregar,
+  :global(.btn-volver) { /* :global() para estilizar una clase que NO es de este módulo */
+    width: 100%;
+    justify-content: center;
+  }
+}

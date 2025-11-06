@@ -1,0 +1,265 @@
+/* =============================================
+   GLOBALES Y VARIABLES
+   ============================================= */
+:root {
+  --clr-main: #000000;
+  --clr-main-light: #0c0c0c;
+  --clr-white: #FFFFFF;
+  --clr-gray: #D3D3D3;
+  --clr-accent-blue: #1E90FF;
+  --clr-accent-green: #39FF14;
+  --clr-accent-red: #FF3333;
+}
+
+/* =============================================
+   RESETS DE TIPOGRAFÍA Y BASE
+   ============================================= */
+/* reset universal */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* reset clave: fondo oscuro y sin márgenes */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: var(--clr-main); 
+}
+
+/* Aplicar Orbitron a los TITULOS */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  color: var(--clr-white); 
+}
+
+/* Aplicar Roboto al resto del texto */
+p, a, input, textarea, ul, button {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* =============================================
+   LAYOUT PRINCIPAL (MainLayout.jsx)
+   ============================================= */
+.wrapper {
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  background-color: var(--clr-main);
+}
+
+main {
+  background-color: var(--clr-main-light);
+  margin: 1rem;
+  margin-left: 0;
+  border-radius: 1rem;
+  padding: 3rem;
+  position: relative; 
+}
+
+/* =============================================
+   MENU MÓVIL (MainLayout.jsx)
+   ============================================= */
+.btn-menu-toggle {
+  display: none;
+  position: fixed; 
+  top: 1.5rem;
+  right: 1.5rem; 
+  z-index: 999;  
+  background-color: var(--clr-main-light);
+  color: var(--clr-accent-green);
+  border: 1px solid var(--clr-accent-blue);
+  border-radius: 0.5rem;
+  width: 50px;
+  height: 50px;
+  font-size: 1.75rem;
+  padding: 0;
+  line-height: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.overlay-mobile {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 99; 
+}
+
+/* =============================================
+   CLASES DE UTILIDAD GLOBALES
+   ============================================= */
+.titulo-principal {
+  text-align: center;
+  font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  font-weight: 800;
+  color: var(--clr-accent-green);
+  margin: 2rem 0;
+  position: relative;
+}
+
+.titulo-principal::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 0.5rem auto 0;
+  background: var(--clr-accent-blue);
+  border-radius: 2px;
+  animation: expand 1s ease forwards;
+}
+
+@keyframes expand {
+  from { width: 0; opacity: 0; }
+  to { width: 60px; opacity: 1; }
+}
+
+.btn-imprimir, .btn-volver {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-imprimir {
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-white);
+  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+}
+
+.btn-imprimir:hover {
+  background-color: var(--clr-accent-green);
+  color: var(--clr-main);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(57, 255, 20, 0.4);
+}
+
+.btn-volver {
+  background-color: var(--clr-main-light);
+  color: var(--clr-gray);
+  border: 1px solid var(--clr-accent-blue);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-volver:hover {
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+}
+
+/* =============================================
+   PÁGINAS NO REFACTORIZADAS (HomePage.jsx)
+   ============================================= */
+.small-text-vision,
+.small-text-mision {
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--clr-gray);
+}
+
+.inicio-section {
+  background-color: var(--clr-main); 
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+.caja-info, .caja-info2 {
+  background-color: var(--clr-main-light); 
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: var(--clr-gray); 
+}
+.caja-info {
+  border: 1px solid var(--clr-accent-green);
+}
+.caja-info2 {
+  border: 1px solid var(--clr-accent-blue);
+  text-align: center;
+}
+.caja-info h3, .caja-info2 h3 {
+  color: var(--clr-accent-blue);
+  margin-bottom: 1rem;
+}
+.enunciado-lvl-up-gamer h3 {
+    color: var(--clr-accent-green); 
+}
+.enunciado-lvl-up-gamer p {
+  font-size: 1.2rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: var(--clr-gray);
+}
+
+.enunciado-lvl-up-gamer {
+  margin-bottom: 2rem; 
+}
+
+.imagen-tienda-box {
+  display: flex; 
+  justify-content: center; 
+  margin-top: 2rem; 
+}
+
+.tiendajpg {
+  max-width: 100%; 
+  height: auto;
+  border-radius: 1rem; 
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); 
+  overflow: hidden; 
+}
+
+.logo-mensaje-principal {
+  border-radius: 2rem; 
+  overflow: hidden;
+  margin: 1rem auto; 
+}
+
+/* =============================================
+   RESPONSIVE GLOBAL (MainLayout.jsx)
+   ============================================= */
+@media (max-width: 968px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  main {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .btn-menu-toggle {
+    display: block;
+  }
+  
+  aside.active + .overlay-mobile {
+    display: block;
+  }
+}

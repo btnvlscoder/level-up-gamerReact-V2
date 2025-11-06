@@ -1,0 +1,85 @@
+/* Contenido de: src/pages/Auth.module.css */
+
+.authContainer {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: var(--clr-main);
+  border: 1px solid var(--clr-accent-blue);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  color: var(--clr-white);
+  border-radius: 1rem;
+}
+
+.authForm .formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.authForm label {
+  display: block;
+  color: var(--clr-accent-blue);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+}
+
+.authForm input {
+  padding: 0.75rem;
+  border: 1px solid var(--clr-accent-blue);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--clr-white);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.authError {
+  color: var(--clr-accent-red) !important;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 1rem;
+  background-color: #ff33332a;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-accent-red);
+  text-align: center;
+}
+
+.authButton {
+  background-color: var(--clr-accent-green);
+  color: var(--clr-main);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.authButton:hover {
+  background-color: #2fb913; 
+}
+
+.authSwitchLink {
+  text-align: center;
+  color: var(--clr-gray);
+  font-family: 'Roboto', sans-serif;
+  margin-top: 1rem;
+}
+
+.authSwitchLink a {
+  color: var(--clr-accent-blue);
+  text-decoration: underline;
+}
+
+/* Responsivo para el contenedor de Auth */
+@media (max-width: 600px) {
+  .authContainer {
+    margin: 1rem 0.5rem;
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,126 @@
+/* Contenido de: src/components/Header.module.css */
+
+/* Estilos de la barra lateral (antes 'aside') */
+.sidebar {
+  padding: 2rem;
+  padding-right: 0;
+  color: var(--clr-white);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 100; 
+}
+
+/* Estilos para modo móvil (cuando 'aside.active' se usaba) */
+.sidebar.active {
+  left: 0;
+}
+
+.logo {
+  font-weight: 500;
+  font-size: 1.75rem; 
+  color: var(--clr-accent-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logojpg {
+  border-radius: 2rem;
+  display: block;
+  max-width: 200px;
+  margin: 1rem auto;
+  transform: translateX(-25px);
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.botonMenu {
+  background-color: transparent;
+  border: 0;
+  color: var(--clr-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  padding: 1rem;
+  font-size: .8rem;
+}
+
+.botonMenu.active {
+  background-color: var(--clr-main-light);
+  color: var(--clr-accent-green);
+  width: 100%;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  position: relative;
+}
+
+.botonMenu.active:after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 2rem;
+  bottom: 100%;
+  right: 0;
+  background-color: transparent;
+  border-bottom-right-radius: 1rem;
+  box-shadow: 0 1rem 0 var(--clr-main-light);
+}
+
+.botonMenu.active:before {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 2rem;
+  top: 100%;
+  right: 0;
+  background-color: transparent;
+  border-top-right-radius: 1rem;
+  box-shadow: 0 -1rem 0 var(--clr-main-light);
+}
+
+.botonCarrito {
+  margin-top: 2rem; 
+}
+
+.textoFooter {
+  color: var(--clr-gray);
+  font-size: 0.85rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.textoSmallFooter {
+  color: var(--clr-gray);
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Estilos responsivos del sidebar (antes en @media 968px) */
+@media (max-width: 968px) {
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    height: 100vh;
+    width: 70%;
+    z-index: 100;
+    transition: left 0.3s ease;
+    background-color: var(--clr-main);
+    padding: 2rem;
+  }
+  
+  .sidebar.active {
+    left: 0;
+  }
+}

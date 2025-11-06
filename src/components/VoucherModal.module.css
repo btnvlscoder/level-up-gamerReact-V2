@@ -1,0 +1,148 @@
+/* Contenido de: src/components/VoucherModal.module.css */
+
+/* Estilo del fondo/overlay del modal */
+.voucherSimple {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+/* Contenedor blanco del voucher */
+.voucherContent {
+  background-color: white;
+  color: #333;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+.voucherContent h3 {
+  color: var(--clr-accent-blue);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.voucherDetails {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+}
+
+.voucherItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Estilos para el formulario de email */
+.voucherEmailForm {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.voucherEmailForm p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.voucherEmailForm input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  box-sizing: border-box; /* Asegura que el padding no rompa el ancho */
+}
+
+.emailSuccessMessage {
+  padding: 1rem;
+  background-color: #f0fdf4;
+  border: 1px solid var(--clr-accent-green);
+  border-radius: 0.5rem;
+  color: #222;
+}
+
+.emailSuccessMessage svg {
+  color: var(--clr-accent-green);
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+/* Resumen de totales dentro del voucher */
+.voucherTotalSummary {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.voucherLine {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.voucherLine.descuento span {
+  color: var(--clr-accent-red);
+  font-weight: 700;
+}
+
+.voucherTotal {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--clr-accent-blue);
+  color: var(--clr-accent-green);
+  display: flex;
+  justify-content: space-between;
+}
+
+.voucherActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Estilos de Impresión */
+@media print {
+  /* :global() se usa para seleccionar elementos fuera del módulo, como 'body' */
+  :global(body) * {
+    visibility: hidden;
+  }
+  
+  .voucherSimple, .voucherSimple * {
+    visibility: visible;
+  }
+  
+  .voucherSimple {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 9999;
+  }
+  
+  /* Ocultar botones en la impresión */
+  .voucherActions, .voucherEmailForm {
+    display: none;
+  }
+}
