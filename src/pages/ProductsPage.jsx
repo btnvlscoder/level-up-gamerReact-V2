@@ -1,104 +1,99 @@
 import React, { useState } from 'react';
 
-// importa la "base de datos" de productos
-import products from '../data/products'; 
-// importa el componente hijo 'productcard' (que tiene sus propios estilos)
-import ProductCard from '../components/productCard'; 
-import { Search } from 'react-bootstrap-icons'; 
+// Importamos la lista de productos desde el archivo de datos
+import products from '../data/products';
+// Importamos el componente ProductCard para mostrar cada producto
+import ProductCard from '../components/ProductCard';
+// Importamos el ícono de búsqueda de Bootstrap
+import { Search } from 'react-bootstrap-icons';
 
-// importamos los estilos modulares para esta pagina
+// Importamos los estilos específicos de esta página
 import styles from './productsPage.module.css';
 
-// logica para extraer las categorias unicas del array de productos
-// 'new set()' elimina duplicados.
+// Creamos un array con las categorías únicas de productos
+// Si products es un array, obtenemos las categorías únicas, sino usamos ["todos"]
 const categoriasUnicas = Array.isArray(products)
   ? ["todos", ...new Set(products.map(p => p.category))]
   : ["todos"];
 
-/**
- * pagina del catalogo de productos.
- * muestra una lista filtrable y buscable de todos los productos.
- */
 export default function ProductsPage() {
-  
-  // estado para el valor actual del filtro de categoria
+  // Estado para guardar la categoría seleccionada en el filtro
   const [categoria, setCategoria] = useState('todos');
-  // estado para el texto actual en la barra de busqueda
+  // Estado para guardar el texto de búsqueda
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
-  // logica de filtrado y busqueda
-  // 'productosfiltrados' es un nuevo array que se recalcula en cada render
+  // Filtramos los productos según la categoría y el término de búsqueda
   const productosFiltrados = (Array.isArray(products) ? products : [])
-    // primer .filter() por categoria
+    // Primer filtro: por categoría
     .filter(p => {
-      // si la categoria es 'todos', devuelve true (no filtrar)
+      // Si la categoría es "todos", mostramos todos los productos
       return categoria === 'todos' ? true : p.category === categoria;
     })
-    // segundo .filter() por termino de busqueda
+    // Segundo filtro: por término de búsqueda
     .filter(p => {
-      const t = terminoBusqueda.toLowerCase();
-      // busca el termino en el nombre o en la marca (signature)
+      const t = terminoBusqueda.toLowerCase(); // Convertimos a minúsculas para buscar sin importar mayúsculas
+      
+      // Buscamos en el nombre del producto
       const nombreCoincide = p.name && p.name.toLowerCase().includes(t);
+      // Buscamos en la marca del producto
       const marcaCoincide = p.signature && p.signature.toLowerCase().includes(t);
+      // Mostramos el producto si coincide en nombre o marca
       return nombreCoincide || marcaCoincide;
     });
 
   return (
     <>
-      {/* '.titulo-principal' es una clase global de style.css */}
+      {/* Título de la página */}
       <h2 className="titulo-principal">Catalogo de Productos</h2>
       
-      {/* usamos la clase del modulo para la barra de herramientas */}
+      {/* Barra de herramientas con filtros y búsqueda */}
       <div className={styles.productosToolbar}>
         
-        {/* filtro <select> */}
-        <select 
-          id="filtro-categoria" 
+        {/* Select para filtrar por categoría */}
+        <select
+          id="filtro-categoria"
           className={styles.filtroCategoria}
-          value={categoria} // controlado por el estado
-          onChange={(e) => setCategoria(e.target.value)} // actualiza el estado al cambiar
+          value={categoria} // Valor controlado por el estado
+          onChange={(e) => setCategoria(e.target.value)} // Actualizamos el estado cuando cambia
         >
-          {/* mapeamos el array 'categoriasunicas' para crear las <option> */}
+          {/* Mapeamos las categorías únicas para crear las opciones */}
           {categoriasUnicas.map(cat => (
             <option key={cat} value={cat}>
+              {/* Mostramos texto amigable para "todos" */}
               {cat === 'todos' ? 'Todas las categorias' : cat}
             </option>
           ))}
         </select>
-        
-        {/* buscador <input> */}
-        <input 
-          id="buscador" 
-          className={styles.buscador} 
-          type="search" 
-          placeholder="Buscar producto..." 
-          value={terminoBusqueda} // controlado por el estado
-          onChange={(e) => setTerminoBusqueda(e.target.value)} // actualiza el estado
+
+        {/* Input para buscar productos */}
+        <input
+          id="buscador"
+          className={styles.buscador}
+          type="search"
+          placeholder="Buscar producto..."
+          value={terminoBusqueda} // Valor controlado por el estado
+          onChange={(e) => setTerminoBusqueda(e.target.value)} // Actualizamos el estado cuando escribe
         />
-        {/* este boton actualmente no tiene una funcion 'onclick',
-            la busqueda es reactiva (se ejecuta mientras escribes) */}
+        {/* Botón de búsqueda (actualmente decorativo, la búsqueda es en tiempo real) */}
         <button id="btnBuscar" className="btn btn-primary">
           <Search />
         </button>
       </div>
 
-      {/* contenedor del grid de productos */}
+      {/* Contenedor donde se muestran los productos */}
       <div className={styles.contenedorProductos}>
         
-        {/* renderizado condicional:
-            si hay productos, mapealos y renderiza un 'productcard' por cada uno.
-            si no, muestra el mensaje de 'noresultados'.
-        */}
+        {/* Si hay productos filtrados, los mostramos */}
         {productosFiltrados.length > 0 ? (
           productosFiltrados.map(producto => (
-            <ProductCard 
-              key={producto.code} 
-              product={producto}
+            <ProductCard
+              key={producto.code} // Key única para cada producto
+              product={producto}   // Pasamos el producto como prop
             />
           ))
         ) : (
+          /* Si no hay resultados, mostramos mensaje */
           <div className={styles.noResultados}>
-            {/* usamos iconos de bootstrap (cargados globalmente en main.jsx) */}
             <i className="bi bi-exclamation-triangle"></i> No se encontraron productos.
           </div>
         )}

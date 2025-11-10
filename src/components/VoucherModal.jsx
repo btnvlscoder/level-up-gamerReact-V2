@@ -1,39 +1,30 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// funcion de utilidad para formatear precios (formatter.js)
+
+// Importamos la función para formatear precios
 import { PriceFormat } from '../utils/formatter';
+// Importamos íconos de Bootstrap
 import { Receipt, Send, ArrowLeft, CheckCircleFill } from 'react-bootstrap-icons';
-// hook para acceder al contexto de autenticacion (AuthContext.jsx)
-import { useAuth } from '../context/AuthContext'; 
+// Importamos el contexto de autenticación para obtener el usuario actual
+import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
-// importamos los estilos modulares (VoucherModal.module.css)
+// Importamos los estilos específicos de este componente
 import styles from './VoucherModal.module.css';
 
-/**
- * componente 'vouchermodal'.
- * es el modal (pop-up) que aparece despues de finalizar una compra.
- * muestra el resumen y simula el envio de un correo.
- * @param {object} props
- * @param {array} props.cart - el array de productos (el snapshot) de la compra.
- * @param {number} props.subtotal - el subtotal de la compra.
- * @param {number} props.discount - el descuento aplicado.
- * @param {number} props.cartTotal - el total final.
- * @param {function} props.onClose - la funcion para cerrar el modal (viene de CartPage.jsx).
- */
+// Componente modal que muestra el comprobante de compra
 export default function VoucherModal({ cart, subtotal, discount, cartTotal, onClose }) {
-  // obtenemos el 'currentuser' para pre-rellenar el campo de email
+  // Obtenemos el usuario actual para pre-llenar el email
   const { currentUser } = useAuth();
   
-  // 'email' es el estado para el input de correo (controlado)
-  // se inicializa con el email del usuario si existe, o vacio.
-  const [email, setEmail] = useState(currentUser?.email || ''); 
-  // 'isemailsent' controla si mostramos el formulario de email o el mensaje de exito
+  // Estado para el email donde enviar el comprobante
+  const [email, setEmail] = useState(currentUser?.email || '');
+  // Estado para controlar si ya se "envió" el email
   const [isEmailSent, setIsEmailSent] = useState(false);
   
   const navigate = useNavigate();
 
-  // genera la fecha actual formateada para mostrar en el voucher
+  // Generamos la fecha actual formateada en español de Chile
   const fecha = new Date().toLocaleDateString('es-CL', {
     year: 'numeric',
     month: 'long',
@@ -42,43 +33,40 @@ export default function VoucherModal({ cart, subtotal, discount, cartTotal, onCl
     minute: '2-digit'
   });
 
-  /**
-   * manejador para el formulario de envio de correo (simulado).
-   * @param {object} e - el evento del formulario
-   */
+  // Función para simular el envío del comprobante por email
   const handleSimulateEmailSend = (e) => {
-    e.preventDefault(); // previene recarga de pagina
+    e.preventDefault(); // Prevenimos el comportamiento por defecto del formulario
     
-    // validacion simple
+    // Validamos que el email no esté vacío
     if (email.trim() === '') {
       toast.error("Por favor, ingresa un correo.");
-      return; // corta la ejecucion
+      return; // Cortamos la ejecución si no hay email
     }
     
-    // simulacion de envio
+    // Simulamos el envío (en un proyecto real aquí iría la llamada a una API)
     console.log(`Simulando envio de boleta a: ${email}`);
-    setIsEmailSent(true); // cambia la vista al mensaje de exito
+    setIsEmailSent(true); // Cambiamos el estado para mostrar el mensaje de éxito
     toast.success("Comprobante enviado (Simulado)!");
   };
 
-  /**
-   * manejador para el boton "volver al catalogo".
-   */
+  // Función para cerrar el modal y volver al catálogo
   const handleCloseAndNavigate = () => {
-    onClose(); // cierra el modal (llamando a la funcion del padre, CartPage.jsx)
-    navigate('/products'); // redirige al catalogo
+    onClose(); // Cerramos el modal (llamando a la función del padre)
+    navigate('/products'); // Navegamos al catálogo de productos
   };
 
   return (
-    // '.vouchersimple' es el overlay oscuro que cubre toda la pantalla
+    // Overlay oscuro que cubre toda la pantalla
     <div className={styles.voucherSimple}>
-      {/* '.vouchercontent' es la caja blanca del modal */}
+      {/* Contenedor principal del modal */}
       <div className={styles.voucherContent}>
         <h3><Receipt /> compra realizada</h3>
+        
+        {/* Detalles de la compra */}
         <div className={styles.voucherDetails}>
           <p><strong>fecha:</strong> <span>{fecha}</span></p>
           
-          {/* lista de items comprados */}
+          {/* Lista de productos comprados */}
           <div className={styles.voucherItemsList}>
             {cart.map(item => (
               <div className={styles.voucherItem} key={item.code}>
@@ -88,12 +76,12 @@ export default function VoucherModal({ cart, subtotal, discount, cartTotal, onCl
             ))}
           </div>
           
-          {/* resumen de totales */}
+          {/* Resumen de totales */}
           <div className={styles.voucherTotalSummary}>
             <p className={styles.voucherLine}>
               <strong>subtotal:</strong> <span>{PriceFormat(subtotal)}</span>
             </p>
-            {/* renderizado condicional del descuento */}
+            {/* Mostramos descuento solo si es mayor a 0 */}
             {discount > 0 && (
               <p className={`${styles.voucherLine} ${styles.descuento}`}>
                 <strong>descuento duoc (10%):</strong> <span>- {PriceFormat(discount)}</span>
@@ -105,31 +93,30 @@ export default function VoucherModal({ cart, subtotal, discount, cartTotal, onCl
           </div>
         </div>
 
-        {/* formulario de envio de correo */}
+        {/* Formulario para "enviar" el comprobante por email */}
         <form className={styles.voucherEmailForm} onSubmit={handleSimulateEmailSend}>
-
-          {/* renderizado condicional: muestra el input o el mensaje de exito */}
+          
+          {/* Mostramos el formulario o el mensaje de éxito según el estado */}
           {!isEmailSent ? (
             <>
               <p>ingresa tu correo para enviar una copia:</p>
-              <input 
-                type="email" 
+              <input
+                type="email"
                 placeholder="tu.correo@ejemplo.com"
-                value={email} // controlado
-                onChange={(e) => setEmail(e.target.value)}
+                value={email} // Controlado por el estado
+                onChange={(e) => setEmail(e.target.value)} // Actualizamos el estado
                 required
               />
-              {/* '.btn-imprimir' es una clase global de style.css */}
-              <button 
-                type="submit" 
+              {/* Botón para enviar el comprobante */}
+              <button
+                type="submit"
                 className="btn-imprimir"
               >
                 <Send /> enviar copia
               </button>
             </>
-
           ) : (
-            // vista de exito
+            // Mensaje de éxito después del "envío"
             <div className={styles.emailSuccessMessage}>
               <CheckCircleFill />
               <p>¡se ha enviado el comprobante al correo <strong>{email}</strong>!</p>
@@ -137,9 +124,9 @@ export default function VoucherModal({ cart, subtotal, discount, cartTotal, onCl
           )}
         </form>
 
-      {/* botones de accion del modal */}
+        {/* Botones de acción del modal */}
         <div className={styles.voucherActions}>
-          {/* '.btn-volver' es una clase global de style.css */}
+          {/* Botón para volver al catálogo */}
           <button className="btn-volver" onClick={handleCloseAndNavigate}>
             <ArrowLeft /> volver al catalogo
           </button>

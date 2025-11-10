@@ -1,85 +1,75 @@
 import React, { createContext, useContext, useReducer, useMemo, useEffect } from 'react';
-// importamos 'useauth' porque el carrito necesita saber quien es el 'currentuser'
-// para aplicar el descuento de duoc.
+
+// Importamos el contexto de autenticación para aplicar descuentos según el usuario
 import { useAuth } from './AuthContext';
 
-/*
-   definicion de acciones
-*/
-// 'actions' son constantes que describen las "ordenes" que podemos enviar al reducer.
+// Definimos las acciones posibles que se pueden realizar en el carrito
 export const ACTIONS = {
-  ADD_ITEM: 'ADD_ITEM',
-  REMOVE_ITEM: 'REMOVE_ITEM',
-  INCREASE_QUANTITY: 'INCREASE_QUANTITY',
-  DECREASE_QUANTITY: 'DECREASE_QUANTITY',
-  CLEAR_CART: 'CLEAR_CART',
+  ADD_ITEM: 'ADD_ITEM',           // Agregar un producto
+  REMOVE_ITEM: 'REMOVE_ITEM',     // Eliminar un producto
+  INCREASE_QUANTITY: 'INCREASE_QUANTITY', // Aumentar cantidad
+  DECREASE_QUANTITY: 'DECREASE_QUANTITY', // Disminuir cantidad
+  CLEAR_CART: 'CLEAR_CART',       // Vaciar todo el carrito
 };
 
-/*
-   funcion reductora (logica de estado)
-*/
-/**
- * 'cartreducer' es una funcion pura que toma el estado actual y una accion,
- * y devuelve un nuevo estado. maneja toda la logica del carrito.
- * @param {array} state - el estado actual del carrito (un array de productos).
- * @param {object} action - la accion a ejecutar (ej. { type: 'ADD_ITEM', payload: producto }).
- */
+// Función reductora que maneja todas las acciones del carrito
 export function cartReducer(state, action) {
   switch (action.type) {
-    // caso para anadir un producto
+    // Agregar un producto al carrito
     case ACTIONS.ADD_ITEM: {
       const product = action.payload;
+      // Verificamos si el producto ya está en el carrito
       const existingItem = state.find(item => item.code === product.code);
 
       if (existingItem) {
-        // si el item ya existe, mapeamos el estado y solo incrementamos la cantidad de ese item
+        // Si ya existe, aumentamos la cantidad en 1
         return state.map(item =>
           item.code === product.code
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        // si es un item nuevo, lo agregamos al array con cantidad 1
+        // Si no existe, lo agregamos con cantidad 1
         return [...state, { ...product, quantity: 1 }];
       }
     }
-    // caso para eliminar un producto (por su 'code')
+
+    // Eliminar un producto del carrito
     case ACTIONS.REMOVE_ITEM: {
       const code = action.payload;
-      // filtramos el estado, devolviendo un nuevo array sin el item
+      // Filtramos el array para quitar el producto con ese código
       return state.filter(item => item.code !== code);
     }
-    // caso para incrementar la cantidad
+
+    // Aumentar la cantidad de un producto
     case ACTIONS.INCREASE_QUANTITY: {
       const code = action.payload;
       return state.map(item =>
         item.code === code ? { ...item, quantity: item.quantity + 1 } : item
       );
     }
-    // caso para decrementar la cantidad
+
+    // Disminuir la cantidad de un producto
     case ACTIONS.DECREASE_QUANTITY: {
       const code = action.payload;
       return state.map(item =>
-        // solo decrementamos si la cantidad es mayor a 1
+        // Solo disminuimos si la cantidad es mayor a 1
         item.code === code && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
       );
     }
-    // caso para vaciar el carrito
+
+    // Vaciar todo el carrito
     case ACTIONS.CLEAR_CART: {
-      return []; // devolvemos un array vacio
+      return []; // Devolvemos un array vacío
     }
     default:
       return state;
   }
 }
 
-/**
- * funcion helper para cargar el carrito guardado en localstorage.
- * esto permite que el carrito persista despues de recargar la pagina.
- * @returns {array} - el carrito guardado o un array vacio.
- */
+// Función para cargar el carrito guardado en localStorage
 const getInitialCart = () => {
   try {
     const savedCart = localStorage.getItem('cart-levelup');
@@ -90,36 +80,24 @@ const getInitialCart = () => {
   }
 };
 
-// 1. creamos el contexto del carrito
+// Creamos el contexto del carrito
 const CartContext = createContext();
 
-// 2. creamos el proveedor del contexto
-/**
- * componente proveedor que envuelve la aplicacion y maneja el estado del carrito.
- * @param {object} props - props de react, 'children' son los componentes hijos.
- */
+// Proveedor del contexto del carrito
 export function CartProvider({ children }) {
-  // 'usereducer' es un hook para manejar estados complejos.
-  // 'cart' es el estado actual.
-  // 'dispatch' es la funcion para enviar acciones al 'cartreducer'.
-  // 'getinitialcart()' es la funcion que define el estado inicial (desde localstorage).
+  // useReducer maneja el estado del carrito con todas las acciones posibles
+  // getInitialCart carga el carrito guardado en localStorage al iniciar
   const [cart, dispatch] = useReducer(cartReducer, [], getInitialCart);
   
-  // obtenemos el 'currentuser' del 'authcontext'
+  // Obtenemos el usuario actual para aplicar descuentos
   const { currentUser } = useAuth();
 
-  // 'useeffect' para persistir el carrito en localstorage.
-  // se ejecuta cada vez que el estado 'cart' cambia.
+  // Efecto que guarda el carrito en localStorage cada vez que cambia
   useEffect(() => {
     localStorage.setItem('cart-levelup', JSON.stringify(cart));
   }, [cart]);
 
-  /*
-     wrappers de dispatch
-     estas funciones "envuelven" la llamada a 'dispatch' para que
-     los componentes (ej. productcard.jsx) no tengan que saber
-     la estructura de las acciones (type, payload).
-  */
+  // Funciones que envuelven las llamadas a dispatch para hacerlas más fáciles de usar
   const addItem = (product) => {
     dispatch({ type: ACTIONS.ADD_ITEM, payload: product });
   };
@@ -136,30 +114,26 @@ export function CartProvider({ children }) {
     dispatch({ type: ACTIONS.CLEAR_CART });
   };
 
-  /*
-     calculo de totales (con descuento)
-     usamos 'usememo' para "memorizar" el resultado de estos calculos.
-     esto evita que los totales se recalculen en cada renderizado,
-     solo se recalculan si 'cart' o 'currentuser' cambian.
-  */
+  // Cálculos de totales que se memorizan para mejor rendimiento
   const { totalItems, subtotal, discount, cartTotal } = useMemo(() => {
-    // calculamos el numero total de items (sumando cantidades)
+    // Calculamos el total de items (sumando todas las cantidades)
     const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-    // calculamos el subtotal (precio * cantidad)
+    // Calculamos el subtotal (precio * cantidad de cada producto)
     const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     
     let discount = 0;
-    // logica de negocio: aplicar descuento si el usuario es de duoc
+    // Aplicamos descuento del 10% si el usuario es de Duoc
     if (currentUser && currentUser.tieneDescuentoDuoc) {
-      discount = subtotal * 0.10; // 10% de descuento
+      discount = subtotal * 0.10;
     }
     
+    // Calculamos el total final restando el descuento
     const cartTotal = subtotal - discount;
     
     return { totalItems, subtotal, discount, cartTotal };
-  }, [cart, currentUser]); // dependencias: recalcular solo si esto cambia
+  }, [cart, currentUser]); // Se recalculan solo si cambia el carrito o el usuario
 
-  // 'value' es el objeto que compartimos a traves del contexto
+  // Objeto con todos los valores que estarán disponibles en el contexto
   const value = {
     cart,
     addItem,
@@ -176,14 +150,11 @@ export function CartProvider({ children }) {
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
-/**
- * hook personalizado para consumir el contexto del carrito.
- * @returns {object} - el valor del contexto del carrito.
- */
+// Hook personalizado para usar el contexto del carrito
 export function useCart() {
   const context = useContext(CartContext);
-  // 'if' de guarda: si 'context' es indefinido, significa que 'usecart'
-  // se esta usando fuera de un 'cartprovider', lo cual es un error.
+  
+  // Verificamos que se esté usando dentro del proveedor
   if (!context) {
     throw new Error('Usecart debe ser usado dentro de un cartprovider');
   }

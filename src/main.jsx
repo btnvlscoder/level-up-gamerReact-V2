@@ -1,33 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// importaciones de react-router-dom para manejar el enrutamiento de la aplicacion
+
+// Importamos React Router para la navegación entre páginas
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-// importacion de react-hot-toast para mostrar notificaciones (toasts)
+
+// Importamos Toaster para mostrar notificaciones
 import { Toaster } from 'react-hot-toast';
 
-/*
-   importaciones de estilos globales
-*/
-// importa los estilos base de bootstrap
+// Importamos Bootstrap para los estilos base
 import 'bootstrap/dist/css/bootstrap.min.css';
-// importa nuestros estilos globales personalizados (variables css, resets, etc.)
-// es crucial que este se importe despues de bootstrap para poder sobrescribirlo.
-import './style.css'; 
+// Importamos nuestros estilos personalizados
+import './style.css';
 
-/*
-   importaciones de proveedores de contexto
-*/
-// proveedor para el estado global del carrito de compras
+// Importamos los proveedores de estado global (carrito y autenticación)
 import { CartProvider } from './context/CartContext';
-// proveedor para el estado global de autenticacion de usuario
-import { AuthProvider } from './context/AuthContext'; 
+import { AuthProvider } from './context/AuthContext';
 
-/*
-   importaciones de layout y paginas
-*/
-// 'mainLayout' es el componente base que envuelve todas las paginas (incluye header, footer)
+// Importamos el layout principal y todas las páginas
 import MainLayout from './components/MainLayout';
-// paginas de la aplicacion
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -37,71 +27,58 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 
-/*
-   definicion de rutas
-*/
-// 'createBrowserRouter' define la estructura de navegacion de la aplicacion
+// Configuramos las rutas de la aplicación
 const router = createBrowserRouter([
   {
-    // la ruta raiz ('/') utiliza 'mainLayout' como su elemento principal
+    // Ruta principal que usa MainLayout como plantilla
     path: '/',
     element: <MainLayout />,
-    // 'children' define las rutas anidadas que se renderizaran dentro del <outlet> de 'mainLayout'
+    // Rutas hijas que se mostrarán dentro del MainLayout
     children: [
-      // 'index: true' marca a 'homePage' como la pagina por defecto para la ruta '/'
-      { index: true, element: <HomePage /> },
-      { path: 'products', element: <ProductsPage /> },
-      // ':code' es un parametro dinamico en la url (ej. /product/jm001)
-      { path: 'product/:code', element: <ProductDetailPage /> },
-      { path: 'contact', element: <ContactPage /> },
-      { path: 'cart', element: <CartPage /> },
-      { path: 'login', element: <LoginPage /> },
-      { path: 'register', element: <RegisterPage /> },
-      // 'profilePage' es una ruta que probablemente sera protegida internamente
-      { path: 'profile', element: <ProfilePage /> }, 
+      { index: true, element: <HomePage /> }, // Página de inicio
+      { path: 'products', element: <ProductsPage /> }, // Catálogo de productos
+      { path: 'product/:code', element: <ProductDetailPage /> }, // Detalle de producto
+      { path: 'contact', element: <ContactPage /> }, // Formulario de contacto
+      { path: 'cart', element: <CartPage /> }, // Carrito de compras
+      { path: 'login', element: <LoginPage /> }, // Inicio de sesión
+      { path: 'register', element: <RegisterPage /> }, // Registro de usuario
+      { path: 'profile', element: <ProfilePage /> }, // Perfil de usuario
     ],
   },
 ]);
 
-/*
-   montaje de la aplicacion
-*/
-// 'ReactDOM.createRoot' selecciona el div con id "root" en el index.html
-// este es el punto de anclaje donde vivira toda la aplicacion de react
+// Creamos el punto de entrada de React en el div con id "root"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// 'root.render()' inicia el proceso de renderizado de react
+// Renderizamos toda la aplicación
 root.render(
-  // 'react.strictmode' activa chequeos adicionales en desarrollo para detectar problemas
   <React.StrictMode>
-    {/* envolvimos la app en 'authProvider' para que todos los componentes
-        hijos (incluyendo 'cartProvider') puedan acceder al usuario actual */}
+    {/* AuthProvider maneja el estado de autenticación (login, registro) */}
     <AuthProvider>
-      {/* 'cartProvider' necesita acceso a 'authProvider' para aplicar descuentos
-          basados en el usuario (ej. correo @duocuc.cl) */}
+      {/* CartProvider maneja el estado del carrito de compras */}
       <CartProvider>
-        {/* 'routerProvider' gestiona cual pagina mostrar basado en la url */}
+        {/* RouterProvider maneja la navegación entre páginas */}
         <RouterProvider router={router} />
         
-        {/* 'toaster' es el componente que renderiza las notificaciones
-            lo ponemos aqui para que este disponible en toda la app */}
+        {/* Toaster muestra notificaciones en toda la app */}
         <Toaster
-          position="top-right" // las notificaciones apareceran arriba a la derecha
-          toastOptions={{ // configuracion por defecto para todos los toasts
+          position="top-right" // Posición de las notificaciones
+          toastOptions={{
+            // Estilo base para todas las notificaciones
             style: {
               background: 'var(--clr-main-light)',
               color: 'var(--clr-accent-green)',
               border: '1px solid var(--clr-accent-green)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.6)',
             },
-            // estilos especificos para toasts de exito
+            // Estilo específico para notificaciones de éxito
             success: {
               iconTheme: {
                 primary: 'var(--clr-accent-green)',
                 secondary: 'var(--clr-main)',
               },
             },
-            // estilos especificos para toasts de error
+            // Estilo específico para notificaciones de error
             error: {
               style: {
                 background: '#ff33332a',

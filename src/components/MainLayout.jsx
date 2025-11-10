@@ -1,57 +1,43 @@
-import React, { useState } from 'react'; 
-// 'outlet' es el marcador de posicion donde react-router renderiza las paginas (children)
-import { Outlet } from 'react-router-dom';
-// 'header' es el componente de la barra lateral (Header.jsx)
-import Header from './Header'; 
-// 'list' es el icono de hamburguesa para el menu movil
-import { List } from 'react-bootstrap-icons'; 
+import React, { useState } from 'react';
 
-/**
- * componente 'mainlayout' (plantilla principal).
- * define la estructura visual comun: barra lateral (header) y area de contenido (main).
- * tambien maneja la logica del menu movil.
- */
+// Importamos Outlet para mostrar las páginas dentro del layout
+import { Outlet } from 'react-router-dom';
+// Importamos el componente Header (la barra lateral de navegación)
+import Header from './Header';
+// Importamos el ícono de hamburguesa para el botón del menú móvil
+import { List } from 'react-bootstrap-icons';
+
+// Este es el componente principal que define cómo se ve toda la aplicación
 function MainLayout() {
-  // 'ismenuopen' es el estado que controla si el menu movil esta visible
+  // Estado para saber si el menú móvil está abierto o cerrado
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // 'togglemenu' es la funcion que invierte el estado 'ismenuopen'
-  // 'prev => !prev' es la forma segura de actualizar un estado basado en su valor anterior
+  // Función para abrir o cerrar el menú móvil
   const toggleMenu = () => {
-    setIsMenuOpen(prev => !prev);
+    setIsMenuOpen(prev => !prev); // Cambia al valor contrario del actual
   };
 
   return (
-    // '.wrapper' es la clase global (en style.css) que define el grid layout
+    // Este div es el contenedor principal con dos columnas: sidebar y contenido
     <div className="wrapper">
       
-      {/* 1. la barra lateral (header)
-         le pasamos el estado 'ismenuopen' y la funcion 'togglemenu' como props
-         para que el header (Header.jsx) sepa si debe mostrarse (en movil) y
-         para que los enlaces del header puedan cerrar el menu al navegar.
-      */}
+      {/* La barra lateral de navegación */}
+      {/* Le pasamos el estado del menú y la función para cambiarlo */}
       <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
 
-      {/* 2. el overlay movil
-         esta capa oscura solo es visible en movil cuando 'ismenuopen' es true
-         (controlado por style.css).
-         al hacer clic en el, se cierra el menu llamando a 'togglemenu'.
-      */}
+      {/* Capa oscura que aparece en móviles cuando el menú está abierto */}
+      {/* Al hacer clic se cierra el menú */}
       <div className="overlay-mobile" onClick={toggleMenu}></div>
 
-      {/* 3. el contenedor de contenido principal */}
+      {/* Área de contenido principal */}
       <main>
-        {/* el boton hamburguesa (definido en style.css)
-            solo es visible en movil. al hacer clic, abre el menu.
-        */}
+        {/* Botón de menú hamburguesa - solo visible en teléfonos */}
         <button className="btn-menu-toggle" onClick={toggleMenu}>
-          <List />
+          <List /> {/* Este es el ícono de tres líneas */}
         </button>
 
-        {/* 'outlet' es donde react-router inyecta la pagina actual
-            (ej. HomePage.jsx, ProductsPage.jsx, etc.)
-            segun la ruta definida en main.jsx
-        */}
+        {/* Aquí es donde se muestran las páginas (Home, Productos, Carrito, etc.) */}
+        {/* React Router cambia lo que se muestra aquí según la URL */}
         <Outlet />
       </main>
     </div>

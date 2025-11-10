@@ -1,89 +1,91 @@
 import React, { useState } from 'react';
-// hook para acceder al contexto de autenticacion (AuthContext.jsx)
+
+// Importamos el contexto de autenticación para usar la función de login
 import { useAuth } from '../context/AuthContext';
-// hook para navegar
+// Importamos useNavigate para redirigir después del login
 import { useNavigate } from 'react-router-dom';
+// Importamos toast para mostrar notificaciones
 import toast from 'react-hot-toast';
 
-// importamos los estilos compartidos (Auth.module.css)
+// Importamos los estilos específicos de esta página
 import styles from './Auth.module.css';
 
-/**
- * pagina de inicio de sesion.
- * renderiza un formulario para que los usuarios ingresen.
- */
 export default function LoginPage() {
-  // 'email' y 'password' son estados locales para los campos del formulario
+  // Estados para guardar el email y contraseña del formulario
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // 'error' almacena el mensaje si el login falla (ej. "contrasena incorrecta")
+  // Estado para mostrar errores si el login falla
   const [error, setError] = useState('');
-  
-  // extraemos la funcion 'login' del contexto
+
+  // Obtenemos la función login del contexto de autenticación
   const { login } = useAuth();
+  // Hook para navegar entre páginas
   const navigate = useNavigate();
 
-  /**
-   * manejador para el envio (submit) del formulario de login.
-   * @param {object} e - el evento del formulario
-   */
+  // Función que se ejecuta cuando el usuario envía el formulario
   const handleSubmit = async (e) => {
+    // Prevenimos que el formulario recargue la página
     e.preventDefault();
-    setError(''); // limpia errores anteriores
+    // Limpiamos cualquier error anterior
+    setError('');
 
     try {
-      // intentamos iniciar sesion llamando a la funcion 'login' del contexto
+      // Intentamos hacer login con el email y contraseña
       await login(email, password);
+      // Si es exitoso, mostramos mensaje de bienvenida
       toast.success('¡Bienvenido de vuelta!');
-      navigate('/'); // redirigimos al inicio si es exitoso
+      // Redirigimos al usuario a la página de inicio
+      navigate('/');
     } catch (err) {
-      // si 'login' (en AuthContext.jsx) falla, capturamos el error
+      // Si hay error, lo mostramos en el formulario y con notificación
       setError(err.message);
       toast.error(err.message);
     }
   };
 
   return (
-    // usamos la clase '.authcontainer' del modulo importado
+    // Contenedor principal del formulario de login
     <div className={styles.authContainer}>
-      {/* '.titulo-principal' es una clase global de style.css */}
+      {/* Título de la página */}
       <h2 className="titulo-principal" style={{ margin: '0 0 2rem 0' }}>Inicia sesion</h2>
-      
+
+      {/* Formulario de inicio de sesión */}
       <form className={styles.authForm} onSubmit={handleSubmit}>
 
-        {/* muestra el error si existe */}
+        {/* Mostramos error si existe */}
         {error && <div className={styles.authError}>{error}</div>}
 
-        {/* campo de correo electronico */}
+        {/* Campo para el email */}
         <div className={styles.formGroup}>
           <label htmlFor="email">Correo electronico</label>
           <input
             type="email"
             id="email"
-            value={email} // controlado por el estado 'email'
-            onChange={(e) => setEmail(e.target.value)} // actualiza el estado 'email'
+            value={email} // Valor controlado por el estado
+            onChange={(e) => setEmail(e.target.value)} // Actualizamos el estado cuando escribe
             required
           />
         </div>
-        
-        {/* campo de contrasena */}
+
+        {/* Campo para la contraseña */}
         <div className={styles.formGroup}>
           <label htmlFor="password">Contrasena</label>
           <input
             type="password"
             id="password"
-            value={password} // controlado por el estado 'password'
-            onChange={(e) => setPassword(e.target.value)} // actualiza el estado 'password'
+            value={password} // Valor controlado por el estado
+            onChange={(e) => setPassword(e.target.value)} // Actualizamos el estado cuando escribe
             required
           />
         </div>
-        
+
+        {/* Botón para enviar el formulario */}
         <button type="submit" className={styles.authButton}>Entrar</button>
       </form>
-      
-      {/* enlace para redirigir a la pagina de registro */}
+
+      {/* Enlace para ir a la página de registro si no tiene cuenta */}
       <div className={styles.authSwitchLink}>
-        ¿No tienes cuenta? <a onClick={() => navigate('/register')} style={{cursor: 'pointer'}}>Registrate</a>
+        ¿No tienes cuenta? <a onClick={() => navigate('/register')} style={{ cursor: 'pointer' }}>Registrate</a>
       </div>
     </div>
   );

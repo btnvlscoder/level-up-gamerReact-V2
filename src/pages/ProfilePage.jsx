@@ -1,86 +1,78 @@
 import React, { useEffect } from 'react';
-// hook para acceder al contexto de autenticacion
+
+// Importamos el hook useAuth para acceder al usuario actual y la función de logout
 import { useAuth } from '../context/AuthContext';
-// hook de react-router para navegar entre paginas
+// Importamos useNavigate para redirigir al usuario
 import { useNavigate } from 'react-router-dom';
-// iconos de bootstrap
+// Importamos íconos de Bootstrap
 import { PersonVcard, CheckCircleFill, InfoCircleFill } from 'react-bootstrap-icons';
-// para notificaciones
+// Importamos toast para mostrar notificaciones
 import toast from 'react-hot-toast';
 
-// importamos los estilos modulares
+// Importamos los estilos específicos de esta página
 import styles from './profilePage.module.css';
 
-/**
- * pagina de perfil del usuario.
- * muestra la informacion del usuario, el estado de su beneficio
- * y permite cerrar sesion.
- */
 export default function ProfilePage() {
-  // extraemos el usuario actual y la funcion de logout del contexto
+  // Obtenemos el usuario actual y la función para cerrar sesión del contexto
   const { currentUser, logout } = useAuth();
+  // Hook para navegar entre páginas
   const navigate = useNavigate();
 
-  // 'useeffect' para proteger la ruta
+  // useEffect que se ejecuta cuando el componente se monta o cuando currentUser cambia
   useEffect(() => {
-    // si 'currentuser' es nulo (nadie ha iniciado sesion)
+    // Si no hay usuario logueado, mostramos error y redirigimos al login
     if (!currentUser) {
-      // mostramos un error y redirigimos al login
       toast.error("Debes iniciar sesion para ver tu perfil.");
       navigate('/login');
     }
-    // [currentuser, navigate] son las dependencias. el efecto se re-ejecuta si cambian.
-  }, [currentUser, navigate]);
+  }, [currentUser, navigate]); // Se ejecuta cada vez que currentUser o navigate cambian
 
-  /**
-   * maneja el clic en el boton de cerrar sesion.
-   */
+  // Función para cerrar sesión
   const handleLogout = () => {
-    logout(); // llama a la funcion del contexto
-    navigate('/'); // redirige al inicio
-    toast.success("Has cerrado sesion.");
+    logout(); // Llama a la función de logout del contexto
+    navigate('/'); // Redirige al inicio
+    toast.success("Has cerrado sesion."); // Muestra notificación de éxito
   };
 
-  // 'if' de guarda (guard clause):
-  // si 'currentuser' aun no se ha cargado (o el useeffect esta redirigiendo),
-  // no renderizamos nada para evitar un error.
+  // Si no hay usuario logueado, no mostramos nada (el useEffect ya redirigió)
   if (!currentUser) {
-    return null; 
+    return null;
   }
 
-  // formateamos el nombre completo a partir de los datos del usuario
+  // Creamos el nombre completo concatenando los datos del usuario
   const nombreCompleto = `${currentUser.nombre} ${currentUser.apellidoPaterno} ${currentUser.apellidoMaterno}`;
 
-  // logica para clases dinamicas del banner de descuento.
-  // si 'tienedescuentoduoc' es true, usa 'styles.duoc', si no, usa 'styles.noduoc'.
+  // Definimos las clases del banner según si tiene descuento Duoc o no
   const bannerClasses = `${styles.discountBanner} ${currentUser.tieneDescuentoduoc ? styles.duoc : styles.noDuoc}`;
 
   return (
-    // usamos la clase '.profilepage' del modulo de estilos
+    // Contenedor principal de la página de perfil
     <div className={styles.profilePage}>
-      {/* '.titulo-principal' es una clase global de style.css */}
+      {/* Título de la página */}
       <h2 className="titulo-principal">mi perfil</h2>
-      
+
+      {/* Encabezado con información del usuario */}
       <div className={styles.profileHeader}>
-        <PersonVcard className={styles.icon} />
+        <PersonVcard className={styles.icon} /> {/* Ícono de perfil */}
         <div>
-          <h3>{nombreCompleto}</h3>
-          <span className={styles.email}>{currentUser.email}</span>
+          <h3>{nombreCompleto}</h3> {/* Nombre completo */}
+          <span className={styles.email}>{currentUser.email}</span> {/* Email */}
         </div>
       </div>
 
+      {/* Sección de información y beneficios */}
       <div className={styles.profileInfo}>
         <p>Esta es tu informacion de usuario y beneficios.</p>
         
-        {/* renderizado condicional del banner */}
+        {/* Mostramos diferente banner según si tiene descuento Duoc o no */}
         {currentUser.tieneDescuentoduoc ? (
-          // version del banner para usuarios de duoc
+          // Banner para usuarios con descuento Duoc
           <div className={bannerClasses}>
             <h4><CheckCircleFill /> Beneficio duoc uc activado</h4>
             <p>¡Felicidades! tienes un <b>10% de descuento</b> en todas tus compras por ser estudiante de duoc uc.</p>
           </div>
         ) : (
-          // version del banner para otros usuarios
+          // Banner para usuarios sin descuento Duoc
           <div className={bannerClasses}>
             <h4><InfoCircleFill /> Beneficios estudiantiles</h4>
             <p>¿Sabias que si te registras con tu correo @duocuc.cl obtienes un 10% de descuento? ¡Visita duoc uc para mas beneficios!</p>
@@ -88,7 +80,7 @@ export default function ProfilePage() {
         )}
       </div>
 
-      {/* boton de logout con su clase especifica del modulo */}
+      {/* Botón para cerrar sesión */}
       <button className={styles.profileLogoutButton} onClick={handleLogout}>
         cerrar sesion
       </button>

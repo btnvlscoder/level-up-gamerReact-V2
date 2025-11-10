@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-// 'useauth' es un hook personalizado que nos da acceso al contexto de autenticacion (authContext.jsx)
+
+// Importamos el hook useAuth para acceder al contexto de autenticación
 import { useAuth } from '../context/AuthContext';
-// 'usenavigate' es un hook de react-router para redirigir al usuario programaticamente
+// Importamos useNavigate para redirigir al usuario después del registro
 import { useNavigate } from 'react-router-dom';
-// 'toast' es para mostrar notificaciones emergentes
+// Importamos toast para mostrar notificaciones
 import toast from 'react-hot-toast';
 
-// importamos los estilos modulares. 'auth.module.css' se comparte con loginPage.jsx
+// Importamos los estilos específicos de esta página
 import styles from './Auth.module.css';
 
 export default function RegisterPage() {
-  // 'formdata' es un estado que almacena todos los campos del formulario de registro
+  // Estado para guardar todos los datos del formulario
   const [formData, setFormData] = useState({
     rut: '',
     nombre: '',
@@ -20,73 +21,64 @@ export default function RegisterPage() {
     password: '',
     confirmPassword: '',
   });
-  // 'error' almacena el mensaje de error si el registro falla (ej. "email ya existe")
+
+  // Estado para mostrar errores si el registro falla
   const [error, setError] = useState('');
-  
-  // extraemos la funcion 'register' de nuestro contexto de autenticacion
+
+  // Obtenemos la función register del contexto de autenticación
   const { register } = useAuth();
-  // inicializamos el hook 'navigate' para poder redirigir
+  // Hook para navegar entre páginas
   const navigate = useNavigate();
 
-  /**
-   * manejador generico para actualizar el estado 'formdata'.
-   * se activa cada vez que el usuario escribe en un input.
-   * @param {object} e - el evento del input
-   */
+  // Función que se ejecuta cada vez que el usuario escribe en un input
   const handleChange = (e) => {
-    // 'id' (ej. "rut") y 'value' (ej. "12345678-9") vienen del input
+    // Obtenemos el id del input y el valor escrito
     const { id, value } = e.target;
-    // actualizamos el estado. 'prev' es el estado anterior.
-    // usamos el 'id' del input como la clave para actualizar el objeto 'formdata'.
+    
+    // Actualizamos el estado del formulario manteniendo los otros valores
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  /**
-   * manejador para el envio (submit) del formulario.
-   * se activa al presionar el boton de "registrarse".
-   * @param {object} e - el evento del formulario
-   */
+  // Función que se ejecuta cuando el usuario envía el formulario
   const handleSubmit = async (e) => {
-    // previene que el navegador recargue la pagina (comportamiento por defecto del form)
+    // Prevenimos que el formulario recargue la página
     e.preventDefault();
-    // limpia cualquier error de un intento anterior
-    setError(''); 
+    // Limpiamos cualquier error anterior
+    setError('');
 
     try {
-      // llamamos a la funcion 'register' del contexto y le pasamos los datos del formulario.
-      // 'await' pausa la ejecucion hasta que 'register' termine (es asincrona).
+      // Intentamos registrar al usuario llamando a la función del contexto
       const newUser = await register(formData);
-      
-      // si el registro es exitoso, mostramos un toast de bienvenida.
-      // verificamos si el 'newuser' tiene el descuento para un mensaje personalizado.
+
+      // Mostramos mensaje de éxito diferente según si tiene descuento Duoc
       if (newUser.tieneDescuentoDuoc) {
         toast.success('bienvenido! tienes un 10% de descuento por ser de duoc uc.');
       } else {
         toast.success('bienvenido! registro exitoso.');
       }
-      
-      // redirigimos al usuario a la pagina de inicio ('/')
+
+      // Redirigimos al usuario a la página de inicio
       navigate('/');
     } catch (err) {
-      // si 'register' (en authContext.jsx) lanza un error (ej. contrasenas no coinciden),
-      // lo capturamos aqui.
+      // Si hay error, lo mostramos en el formulario y con una notificación
       setError(err.message);
       toast.error(err.message);
     }
   };
 
   return (
-    // 'authcontainer' es la caja principal que centra el formulario
+    // Contenedor principal del formulario
     <div className={styles.authContainer}>
-      {/* 'titulo-principal' es una clase global definida en style.css */}
+      {/* Título de la página */}
       <h2 className="titulo-principal" style={{ margin: '0 0 2rem 0' }}>crear cuenta</h2>
-      
+
+      {/* Formulario de registro */}
       <form className={styles.authForm} onSubmit={handleSubmit}>
         
-        {/* renderizado condicional: muestra este div solo si 'error' no esta vacio */}
+        {/* Mostramos error si existe */}
         {error && <div className={styles.authError}>{error}</div>}
 
-        {/* cada campo del formulario esta envuelto en un 'formgroup' */}
+        {/* Campos del formulario */}
         <div className={styles.formGroup}>
           <label htmlFor="rut">rut (ej: 12345678-9)</label>
           <input type="text" id="rut" value={formData.rut} onChange={handleChange} required />
@@ -115,13 +107,14 @@ export default function RegisterPage() {
           <label htmlFor="confirmPassword">confirmar contrasena</label>
           <input type="password" id="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
         </div>
-        
+
+        {/* Botón para enviar el formulario */}
         <button type="submit" className={styles.authButton}>registrarse</button>
       </form>
-      
-      {/* enlace para navegar a la pagina de login si el usuario ya tiene cuenta */}
+
+      {/* Enlace para ir a la página de login si ya tiene cuenta */}
       <div className={styles.authSwitchLink}>
-        ¿ya tienes cuenta? <a onClick={() => navigate('/login')} style={{cursor: 'pointer'}}>inicia sesion</a>
+        ¿ya tienes cuenta? <a onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>inicia sesion</a>
       </div>
     </div>
   );

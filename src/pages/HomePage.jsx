@@ -1,28 +1,26 @@
 import React from 'react';
-// importacion de iconos
+
+// Importamos íconos de Bootstrap para decorar los títulos
 import { 
   Crosshair, 
   Eye 
 } from 'react-bootstrap-icons';
 
-/**
- * pagina de inicio (home).
- * muestra el banner de bienvenida, "quienes somos", mision y vision.
- * nota: esta pagina usa clases globales definidas en style.css.
- */
 export default function HomePage() { 
   return (
+    // Sección principal de la página de inicio
     <section id="nosotros" className="nosotros-section">
-      {/* 'container' es una clase de bootstrap */}
+      {/* Contenedor de Bootstrap para el layout */}
       <div className="container">
-        {/* 'titulo-principal' es una clase global de style.css */}
+        {/* Título principal de la página */}
         <h2 className="titulo-principal">¡Bienvenido a level-up gamer!</h2>
         
-        {/* seccion del banner principal de bienvenida */}
+        {/* Banner principal de bienvenida */}
         <div className="mensaje-principal">
           <div className="caja-info2">
             <h3>🎮¡Desafia tus limites con level-up gamer!👾</h3>
             <p className="small-mensaje-principal-up">Conviertete en el heroe de tu propia historia y unete a nuestra comunidad de jugadores.</p>
+            {/* Logo de la tienda */}
             <img 
               className="logo-mensaje-principal" 
               src="/img/logo.jpg" 
@@ -33,22 +31,22 @@ export default function HomePage() {
           </div>
         </div>
         
-        {/* seccion "quienes somos" */}
+        {/* Sección "Quiénes somos" */}
         <div className="enunciado-lvl-up-gamer">
           <h3>¿Quienes somos?</h3>
           <p>Level-up gamer es una tienda online dedicada a satisfacer las necesidades de los entusiastas de los videojuegos en chile. lanzada hace dos anos como respuesta a la creciente demanda durante la pandemia, leves-up gamer ofrece una amplia gama de productos para gamers, desde consolas y accesorios hasta computadores y sillas especializadas. aunque no cuenta con una ubicacion fisica, realiza despachos a todo el pais.</p>
         </div>
         
-        {/* 'row' es una clase de bootstrap para el sistema de grid */}
+        {/* Sección de misión y visión usando el sistema de grid de Bootstrap */}
         <div className="row">
-          {/* 'col-lg-6' (bootstrap) crea una columna de 50% en pantallas grandes */}
+          {/* Columna izquierda - Misión */}
           <div className="col-lg-6">
             <div className="caja-info">
               <h3><Crosshair /> Nuestra Mision</h3>
               <p className="small-text-mision">Proporcionar productos de alta calidad para gamers en todo chile, ofreciendo una experiencia de compra unica y personalizada, con un enfoque en la satisfaccion del cliente y el crecimiento de la comunidad gamer.</p>
             </div>
           </div>
-          {/* 'col-lg-6' (bootstrap) crea la segunda columna de 50% */}
+          {/* Columna derecha - Visión */}
           <div className="col-lg-6">
             <div className="caja-info">
               <h3><Eye /> Nuestra Vision</h3>
@@ -56,10 +54,10 @@ export default function HomePage() {
             </div>
           </div>
           
-          {/* contenedor de la imagen de la tienda */}
+          {/* Imagen de la tienda (ocupa toda la fila) */}
           <div className="imagen-tienda-box">
             <img 
-              className="tiendajpg" /* esta clase esta definida en style.css */
+              className="tiendajpg" 
               src="/img/tienda.png" 
               alt="tienda level-up gamer"
             /> 

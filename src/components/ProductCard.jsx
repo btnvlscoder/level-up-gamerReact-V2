@@ -1,61 +1,59 @@
 import React from "react";
-// 'link' se usa para navegar a la pagina de detalle del producto
+
+// Importamos Link para navegar a la página de detalle del producto
 import { Link } from "react-router-dom";
-// icono para el boton "agregar"
+// Importamos el ícono del carrito de Bootstrap
 import { Cart } from "react-bootstrap-icons";
-// funcion de utilidad para formatear el precio (formatter.js)
+// Importamos la función para formatear precios
 import { PriceFormat } from '../utils/formatter.js';
 
-// hook para acceder al contexto del carrito (CartContext.jsx)
-import { useCart } from '../context/CartContext'; 
-// para mostrar notificaciones (ej. "producto agregado")
-import toast from 'react-hot-toast'; 
+// Importamos el contexto del carrito para agregar productos
+import { useCart } from '../context/CartContext';
+// Importamos toast para mostrar notificaciones
+import toast from 'react-hot-toast';
 
-// importamos los estilos modulares (ProductCard.module.css)
+// Importamos los estilos específicos de este componente
 import styles from './ProductCard.module.css';
 
-/**
- * componente 'productcard'.
- * muestra una tarjeta individual de producto para el catalogo.
- * @param {object} props
- * @param {object} props.product - el objeto del producto a mostrar (desde products.js).
- */
-function ProductCard({product}) {
-  // extraemos la funcion 'additem' del contexto del carrito
-  const { addItem } = useCart(); 
+// Componente que muestra una tarjeta de producto individual
+function ProductCard({ product }) {
+  // Obtenemos la función para agregar productos al carrito
+  const { addItem } = useCart();
 
-  // desestructuramos los datos del producto para un acceso mas facil
-  const {code, name, signature, price, img} = product;
-  
-  // logica para la imagen: usa la primera imagen (indice 0) del array 'img',
-  // o usa una imagen 'placeholder' si el array esta vacio o no existe.
+  // Extraemos las propiedades del producto para usarlas más fácilmente
+  const { code, name, signature, price, img } = product;
+
+  // Definimos la URL de la imagen - usamos la primera imagen o una imagen por defecto
   const imageUrl = img && img.length > 0 ? img[0] : '/img/placeholder.jpg';
 
-  /**
-   * manejador para el boton "agregar".
-   */
+  // Función que se ejecuta al hacer clic en "Agregar al carrito"
   const handleAddToCart = () => {
-    addItem(product); // anade este producto al contexto del carrito
-    toast.success(`"${name}" agregado al carrito!`); // muestra notificacion
+    addItem(product); // Agregamos el producto al carrito
+    toast.success(`"${name}" agregado al carrito!`); // Mostramos notificación de éxito
   }
 
   return (
-    // usamos las clases del modulo de estilos
+    // Contenedor principal de la tarjeta de producto
     <div className={styles.product}>
-      {/* la imagen y el titulo son enlaces a la pagina de detalle (ej. /product/jm001) */}
+      {/* Imagen del producto que es un enlace a su página de detalle */}
       <Link to={`/product/${code}`}>
         <img className={styles.productImg} src={imageUrl} alt={name} />
       </Link>
+      
+      {/* Contenedor con la información del producto */}
       <div className={styles.productDetails}>
-        {/* renderizado condicional: solo muestra la marca si existe */}
+        {/* Mostramos la marca del producto si existe */}
         {signature && <p className={styles.productSignature}>{signature}</p>}
+        
+        {/* Nombre del producto que también es un enlace al detalle */}
         <h3 className={styles.productTitle}>
           <Link to={`/product/${code}`}>{name}</Link>
         </h3>
-        
-        {/* usamos la funcion 'priceformat' para mostrar el precio */}
+
+        {/* Precio del producto formateado */}
         <p className={styles.price}>{PriceFormat(price)}</p>
-        
+
+        {/* Botón para agregar el producto al carrito */}
         <button className={styles.productAdd} onClick={handleAddToCart} data-code={code}>
           <Cart /> agregar
         </button>

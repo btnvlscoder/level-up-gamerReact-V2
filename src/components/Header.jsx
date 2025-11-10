@@ -1,97 +1,96 @@
 import React from 'react';
-// hook de react-router para navegar programaticamente
+// Importamos useNavigate para cambiar de página programáticamente
 import { useNavigate } from 'react-router-dom';
-// iconos de bootstrap
+// Importamos íconos de Bootstrap para la navegación
 import {
   Joystick, HouseDoor, Controller, ChatDotsFill, Cart,
   BoxArrowRight, PersonCircle, PersonPlusFill, PersonVcard
 } from 'react-bootstrap-icons';
-// hook para acceder al contexto del carrito (cartContext.jsx)
+// Importamos el contexto del carrito para mostrar la cantidad de items
 import { useCart } from '../context/CartContext';
-// hook para acceder al contexto de autenticacion (authContext.jsx)
+// Importamos el contexto de autenticación para saber si el usuario está logueado
 import { useAuth } from '../context/AuthContext';
-// para mostrar notificaciones
+// Importamos toast para mostrar notificaciones
 import toast from 'react-hot-toast';
 
-// importamos los estilos modulares (header.module.css)
+// Importamos los estilos específicos de este componente
 import styles from './Header.module.css';
 
-/**
- * componente header (la barra lateral de navegacion).
- * @param {object} props
- * @param {boolean} props.isMenuOpen - estado (booleano) que indica si el menu movil esta abierto.
- * @param {function} props.toggleMenu - funcion para cambiar el estado de 'isMenuOpen'.
- */
+// Componente Header - la barra lateral de navegación de la aplicación
 function Header({ isMenuOpen, toggleMenu }) {
-  // extraemos datos del contexto del carrito
+  // Obtenemos la cantidad total de items en el carrito
   const { totalItems } = useCart();
-  // extraemos datos y funciones del contexto de autenticacion
+  // Obtenemos el usuario actual y la función para cerrar sesión
   const { currentUser, logout } = useAuth();
-  // inicializamos el hook 'usenavigate'
+  // Hook para navegar entre páginas
   const navigate = useNavigate();
 
-  /**
-   * manejador para los clics en los enlaces de navegacion.
-   * cierra el menu movil (si esta abierto) y navega a la ruta.
-   * @param {string} path - la ruta a la que navegar (ej. '/products').
-   */
+  // Función que se ejecuta cuando se hace clic en un enlace de navegación
   const handleLinkClick = (path) => {
+    // Si el menú móvil está abierto, lo cerramos al navegar
     if (isMenuOpen) {
       toggleMenu();
     }
+    // Navegamos a la ruta especificada
     navigate(path); 
   };
 
-  /**
-   * manejador para el boton de cerrar sesion.
-   */
+  // Función para cerrar sesión
   const handleLogout = () => {
+    // Si el menú móvil está abierto, lo cerramos
     if (isMenuOpen) {
       toggleMenu();
     }
-    logout(); // llama a la funcion del contexto
-    navigate('/'); // redirige al inicio
+    // Cerramos sesión llamando a la función del contexto
+    logout();
+    // Redirigimos al usuario a la página de inicio
+    navigate('/');
+    // Mostramos notificación de éxito
     toast.success("Has cerrado sesion.");
   };
 
-  // construye las clases para el 'aside' dinamicamente.
-  // si 'isMenuOpen' es true, anade la clase 'styles.active'.
+  // Creamos las clases dinámicas para el sidebar
+  // Si isMenuOpen es true, añadimos la clase 'active' para mostrar el menú en móviles
   const sidebarClasses = `${styles.sidebar} ${isMenuOpen ? styles.active : ''}`;
 
   return (
-    // aplicamos las clases dinamicas al 'aside'
+    // Barra lateral de navegación con clases dinámicas
     <aside className={sidebarClasses}>
+      {/* Encabezado del sidebar con logo */}
       <header>
-        {/* 'e.preventdefault()' evita que el '#' recargue la pagina */}
+        {/* Logo que lleva al inicio al hacer clic */}
         <a href="#" onClick={(e) => { e.preventDefault(); handleLinkClick('/'); }}>
           <h1 className={styles.logo}><Joystick /> Level-up Gamer</h1>
         </a>
+        {/* Imagen del logo */}
         <img className={styles.logojpg} src="/img/logo.jpg" alt="logo level-up gamer" />
       </header>
       
+      {/* Menú de navegación principal */}
       <nav>
         <ul className={styles.menu}>
+          {/* Enlace a la página de inicio */}
           <li>
             <a href="#" className={styles.botonMenu} onClick={(e) => { e.preventDefault(); handleLinkClick('/'); }}>
               <HouseDoor /> Inicio
             </a>
           </li>
+          {/* Enlace al catálogo de productos */}
           <li>
             <a href="#" className={styles.botonMenu} onClick={(e) => { e.preventDefault(); handleLinkClick('/products'); }}>
               <Controller /> Productos
             </a>
           </li>
+          {/* Enlace a la página de contacto */}
           <li>
             <a href="#" className={styles.botonMenu} onClick={(e) => { e.preventDefault(); handleLinkClick('/contact'); }}>
               <ChatDotsFill /> Contactanos
             </a>
           </li>
 
-          {/* renderizado condicional:
-              si 'currentuser' no existe (invitado), muestra login/registro.
-              si 'currentuser' existe (logueado), muestra perfil/cerrar sesion.
-          */}
+          {/* Mostramos diferentes opciones según si el usuario está logueado o no */}
           {!currentUser ? (
+            // Si no hay usuario logueado, mostramos opciones de login y registro
             <>
               <li>
                 <a href="#" className={styles.botonMenu} onClick={(e) => { e.preventDefault(); handleLinkClick('/login'); }}>
@@ -105,6 +104,7 @@ function Header({ isMenuOpen, toggleMenu }) {
               </li>
             </>
           ) : (
+            // Si hay usuario logueado, mostramos perfil y cerrar sesión
             <>
               <li>
                 <a href="#" className={styles.botonMenu} onClick={(e) => { e.preventDefault(); handleLinkClick('/profile'); }}>
@@ -119,18 +119,19 @@ function Header({ isMenuOpen, toggleMenu }) {
             </>
           )}
 
+          {/* Enlace al carrito de compras con contador de items */}
           <li>
-            {/* multiples clases (locales) se unen usando template literals */}
             <a href="#" 
                className={`${styles.botonMenu} ${styles.botonCarrito}`} 
                onClick={(e) => { e.preventDefault(); handleLinkClick('/cart'); }}
             >
-              {/* 'totalitems' viene del 'usecart()' hook */}
               <Cart /> Carrito <span className="numerito">{totalItems}</span>
             </a>
           </li>
         </ul>
       </nav>
+      
+      {/* Pie del sidebar con información de copyright */}
       <footer>
         <p className={styles.textoFooter}>&copy; 2025 level-up gamer</p>
         <small className={styles.textoSmallFooter}>
