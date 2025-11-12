@@ -96,14 +96,33 @@ main {
 }
 
 .overlay-mobile {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 99; 
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 998; /* Debe ser menor que el sidebar pero mayor que el contenido */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Cuando el menú está abierto */
+.overlay-mobile.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Asegurar que el sidebar tenga mayor z-index que el overlay */
+.sidebar {
+  z-index: 999; /* Mayor que el overlay */
+}
+
+/* El botón hamburguesa debe estar por encima de todo */
+.btn-menu-toggle {
+  z-index: 1000;
 }
 
 /*

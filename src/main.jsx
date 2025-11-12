@@ -53,32 +53,28 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // Renderizamos toda la aplicación
 root.render(
   <React.StrictMode>
-    {/* AuthProvider maneja el estado de autenticación (login, registro) */}
-    <AuthProvider>
-      {/* CartProvider maneja el estado del carrito de compras */}
-      <CartProvider>
-        {/* RouterProvider maneja la navegación entre páginas */}
-        <RouterProvider router={router} />
-        
+    <AuthProvider>        {/* AuthProvider maneja el estado de autenticación (login, registro) */}
+      <CartProvider>      {/* CartProvider maneja el estado del carrito de compras */}
+        <RouterProvider router={router} />        {/* RouterProvider maneja la navegación entre páginas */}      
         {/* Toaster muestra notificaciones en toda la app */}
         <Toaster
           position="top-right" // Posición de las notificaciones
           toastOptions={{
-            // Estilo base para todas las notificaciones
+            // todas las notf.
             style: {
               background: 'var(--clr-main-light)',
               color: 'var(--clr-accent-green)',
               border: '1px solid var(--clr-accent-green)',
               boxShadow: '0 4px 12px rgba(0,0,0,0.6)',
             },
-            // Estilo específico para notificaciones de éxito
+            // notf. ok
             success: {
               iconTheme: {
                 primary: 'var(--clr-accent-green)',
                 secondary: 'var(--clr-main)',
               },
             },
-            // Estilo específico para notificaciones de error
+            // notf. X
             error: {
               style: {
                 background: '#ff33332a',
