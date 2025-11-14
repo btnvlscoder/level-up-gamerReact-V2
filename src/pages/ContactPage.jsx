@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [asunto, setAsunto] = useState('');
   const [mensaje, setMensaje] = useState('');
 
-  // Función que se ejecuta cuando se envía el formulario
+  // fn que se ejecuta cuando se envía el formulario
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevenimos que el formulario recargue la página
     

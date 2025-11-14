@@ -9,52 +9,38 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
-// Importamos los estilos (CSS Modules)
 import styles from './Header.module.css';
 
-function Header({ isMenuOpen, toggleMenu }) {
+//
+function Header() {
   const { totalItems } = useCart();
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Cierra el menú en móviles si está abierto
-  const closeMenuIfOpen = () => {
-    if (isMenuOpen) toggleMenu();
-  };
-
-  // Cerrar sesión + feedback + redirección
+  //fn para cerrar sesion
   const handleLogout = () => {
-    closeMenuIfOpen();
     logout();
     navigate('/');
     toast.success("Has cerrado sesión.");
   };
 
-  // Clase dinámica para el sidebar (modo móvil)
-  const sidebarClasses = `${styles.sidebar} ${isMenuOpen ? styles.active : ''}`;
-
   return (
-    <aside className={sidebarClasses}>
+    <aside className={styles.sidebar}>
       <header>
-        {/* Logo que vuelve al inicio */}
-        <NavLink to="/" onClick={closeMenuIfOpen}>
+        <NavLink to="/">
           <h1 className={styles.logo}><Joystick /> Level-up Gamer</h1>
         </NavLink>
-
         <img className={styles.logojpg} src="/img/logo.jpg" alt="logo level-up gamer" />
       </header>
 
       <nav>
         <ul className={styles.menu}>
-
-          {/* Ejemplo de item con clase activa usando NavLink */}
           <li>
             <NavLink 
               to="/"
               className={({ isActive }) =>
                 isActive ? `${styles.botonMenu} ${styles.active}` : styles.botonMenu
               }
-              onClick={closeMenuIfOpen}
             >
               <HouseDoor /> Inicio
             </NavLink>
@@ -66,7 +52,6 @@ function Header({ isMenuOpen, toggleMenu }) {
               className={({ isActive }) =>
                 isActive ? `${styles.botonMenu} ${styles.active}` : styles.botonMenu
               }
-              onClick={closeMenuIfOpen}
             >
               <Controller /> Productos
             </NavLink>
@@ -78,13 +63,11 @@ function Header({ isMenuOpen, toggleMenu }) {
               className={({ isActive }) =>
                 isActive ? `${styles.botonMenu} ${styles.active}` : styles.botonMenu
               }
-              onClick={closeMenuIfOpen}
             >
               <ChatDotsFill /> Contactanos
             </NavLink>
           </li>
 
-          {/* Opciones según estado de autenticación */}
           {!currentUser ? (
             <>
               <li>
@@ -93,7 +76,6 @@ function Header({ isMenuOpen, toggleMenu }) {
                   className={({ isActive }) =>
                     isActive ? `${styles.botonMenu} ${styles.active}` : styles.botonMenu
                   }
-                  onClick={closeMenuIfOpen}
                 >
                   <PersonCircle /> Iniciar Sesion
                 </NavLink>
@@ -105,7 +87,6 @@ function Header({ isMenuOpen, toggleMenu }) {
                   className={({ isActive }) =>
                     isActive ? `${styles.botonMenu} ${styles.active}` : styles.botonMenu
                   }
-                  onClick={closeMenuIfOpen}
                 >
                   <PersonPlusFill /> Registrarse
                 </NavLink>
@@ -119,13 +100,11 @@ function Header({ isMenuOpen, toggleMenu }) {
                   className={({ isActive }) =>
                     isActive ? `${styles.botonMenu} ${styles.active}` : styles.botonMenu
                   }
-                  onClick={closeMenuIfOpen}
                 >
                   <PersonVcard /> Mi Perfil
                 </NavLink>
               </li>
 
-              {/* Botón real para cerrar sesión (porque no navega a una ruta fija) */}
               <li>
                 <button className={styles.botonMenu} onClick={handleLogout}>
                   <BoxArrowRight /> Cerrar Sesion
@@ -134,7 +113,6 @@ function Header({ isMenuOpen, toggleMenu }) {
             </>
           )}
 
-          {/* Carrito con contador */}
           <li>
             <NavLink 
               to="/cart"
@@ -143,12 +121,10 @@ function Header({ isMenuOpen, toggleMenu }) {
                   ? `${styles.botonMenu} ${styles.botonCarrito} ${styles.active}`
                   : `${styles.botonMenu} ${styles.botonCarrito}`
               }
-              onClick={closeMenuIfOpen}
             >
               <Cart /> Carrito <span className="numerito">{totalItems}</span>
             </NavLink>
           </li>
-
         </ul>
       </nav>
 

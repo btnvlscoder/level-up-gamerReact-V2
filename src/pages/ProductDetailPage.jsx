@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 
 // Importamos hooks de React Router para obtener parámetros de la URL y navegar
 import { useParams, Link } from 'react-router-dom';
-// Importamos la lista de productos
 import products from '../data/products';
-// Importamos íconos de Bootstrap
 import { Cart, ArrowLeft, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
-// Importamos la función para formatear precios
 import { PriceFormat } from '../utils/formatter.js';
-// Importamos el contexto del carrito para agregar productos
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
 
@@ -23,7 +19,7 @@ export default function ProductDetailPage() {
 
   // Estado para controlar qué imagen se muestra en el slider (empieza en la primera)
   const [currentIndex, setCurrentIndex] = useState(0);
-  // Obtenemos la función para agregar productos al carrito
+  // Obtenemos la fn para agregar productos al carrito
   const { addItem } = useCart();
 
   // Si no encontramos el producto, mostramos mensaje de error
@@ -42,7 +38,7 @@ export default function ProductDetailPage() {
   // Extraemos las propiedades del producto para usarlas más fácilmente
   const { name, signature, category, description, price, img } = product;
 
-  // Función para ir a la imagen anterior en el slider
+  // fn para ir a la imagen anterior en el slider
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     // Si estamos en la primera imagen, vamos a la última. Sino, retrocedemos una.
@@ -50,7 +46,7 @@ export default function ProductDetailPage() {
     setCurrentIndex(newIndex);
   };
 
-  // Función para ir a la siguiente imagen en el slider
+  // fn para ir a la siguiente imagen en el slider
   const nextSlide = () => {
     const isLastSlide = currentIndex === img.length - 1;
     // Si estamos en la última imagen, vamos a la primera. Sino, avanzamos una.
@@ -58,12 +54,12 @@ export default function ProductDetailPage() {
     setCurrentIndex(newIndex);
   };
 
-  // Función para saltar directamente a una imagen específica
+  // fn para saltar directamente a una imagen específica
   const jumpToSlide = (index) => {
     setCurrentIndex(index);
   };
 
-  // Función para agregar el producto al carrito
+  // fn para agregar el producto al carrito
   const handleAddToCart = () => {
     addItem(product); // Agregamos el producto al carrito
     toast.success(`"${name}" agregado al carrito!`); // Mostramos notificación

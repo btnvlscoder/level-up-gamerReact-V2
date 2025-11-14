@@ -12,7 +12,7 @@ export const ACTIONS = {
   CLEAR_CART: 'CLEAR_CART',       // Vaciar todo el carrito
 };
 
-// Función reductora que maneja todas las acciones del carrito
+// fn reductora que maneja todas las acciones del carrito
 export function cartReducer(state, action) {
   switch (action.type) {
     // Agregar un producto al carrito
@@ -69,7 +69,7 @@ export function cartReducer(state, action) {
   }
 }
 
-// Función para cargar el carrito guardado en localStorage
+// fn para cargar el carrito guardado en localStorage
 const getInitialCart = () => {
   try {
     const savedCart = localStorage.getItem('cart-levelup');
@@ -82,6 +82,17 @@ const getInitialCart = () => {
 
 // Creamos el contexto del carrito
 const CartContext = createContext();
+
+// Hook personalizado para usar el contexto del carrito
+export function useCart() {
+  const context = useContext(CartContext);
+  
+  // Verificamos que se esté usando dentro del proveedor
+  if (!context) {
+    throw new Error('Usecart debe ser usado dentro de un cartprovider');
+  }
+  return context;
+}
 
 // Proveedor del contexto del carrito
 export function CartProvider({ children }) {
@@ -146,17 +157,8 @@ export function CartProvider({ children }) {
     discount,
     cartTotal,
   };
-
+  
+  // Proveemos el contexto a todos los componentes hijos
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
-// Hook personalizado para usar el contexto del carrito
-export function useCart() {
-  const context = useContext(CartContext);
-  
-  // Verificamos que se esté usando dentro del proveedor
-  if (!context) {
-    throw new Error('Usecart debe ser usado dentro de un cartprovider');
-  }
-  return context;
-}

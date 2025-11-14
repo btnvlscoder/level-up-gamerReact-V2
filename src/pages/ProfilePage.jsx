@@ -1,19 +1,13 @@
 import React, { useEffect } from 'react';
 
-// Importamos el hook useAuth para acceder al usuario actual y la función de logout
 import { useAuth } from '../context/AuthContext';
-// Importamos useNavigate para redirigir al usuario
 import { useNavigate } from 'react-router-dom';
-// Importamos íconos de Bootstrap
 import { PersonVcard, CheckCircleFill, InfoCircleFill } from 'react-bootstrap-icons';
-// Importamos toast para mostrar notificaciones
 import toast from 'react-hot-toast';
-
-// Importamos los estilos específicos de esta página
 import styles from './profilePage.module.css';
 
 export default function ProfilePage() {
-  // Obtenemos el usuario actual y la función para cerrar sesión del contexto
+  // Obtenemos el usuario actual y la fn para cerrar sesión del contexto
   const { currentUser, logout } = useAuth();
   // Hook para navegar entre páginas
   const navigate = useNavigate();
@@ -27,9 +21,9 @@ export default function ProfilePage() {
     }
   }, [currentUser, navigate]); // Se ejecuta cada vez que currentUser o navigate cambian
 
-  // Función para cerrar sesión
+  // fn para cerrar sesión
   const handleLogout = () => {
-    logout(); // Llama a la función de logout del contexto
+    logout(); // Llama a la fn de logout del contexto
     navigate('/'); // Redirige al inicio
     toast.success("Has cerrado sesion."); // Muestra notificación de éxito
   };
@@ -49,7 +43,7 @@ export default function ProfilePage() {
     // Contenedor principal de la página de perfil
     <div className={styles.profilePage}>
       {/* Título de la página */}
-      <h2 className="titulo-principal">mi perfil</h2>
+      <h2 className="titulo-principal">Mi Perfil</h2>
 
       {/* Encabezado con información del usuario */}
       <div className={styles.profileHeader}>

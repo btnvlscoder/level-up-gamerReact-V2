@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 
-// Importamos el hook useAuth para acceder al contexto de autenticación
 import { useAuth } from '../context/AuthContext';
-// Importamos useNavigate para redirigir al usuario después del registro
 import { useNavigate } from 'react-router-dom';
-// Importamos toast para mostrar notificaciones
 import toast from 'react-hot-toast';
 
-// Importamos los estilos específicos de esta página
 import styles from './Auth.module.css';
 
 export default function RegisterPage() {
@@ -25,12 +21,12 @@ export default function RegisterPage() {
   // Estado para mostrar errores si el registro falla
   const [error, setError] = useState('');
 
-  // Obtenemos la función register del contexto de autenticación
+  // Obtenemos la fn register del contexto de autenticación
   const { register } = useAuth();
   // Hook para navegar entre páginas
   const navigate = useNavigate();
 
-  // Función que se ejecuta cada vez que el usuario escribe en un input
+  // fn que se ejecuta cada vez que el usuario escribe en un input
   const handleChange = (e) => {
     // Obtenemos el id del input y el valor escrito
     const { id, value } = e.target;
@@ -39,7 +35,7 @@ export default function RegisterPage() {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  // Función que se ejecuta cuando el usuario envía el formulario
+  // fn que se ejecuta cuando el usuario envía el formulario
   const handleSubmit = async (e) => {
     // Prevenimos que el formulario recargue la página
     e.preventDefault();
@@ -47,7 +43,7 @@ export default function RegisterPage() {
     setError('');
 
     try {
-      // Intentamos registrar al usuario llamando a la función del contexto
+      // Intentamos registrar al usuario llamando a la fn del contexto
       const newUser = await register(formData);
 
       // Mostramos mensaje de éxito diferente según si tiene descuento Duoc
@@ -108,7 +104,7 @@ export default function RegisterPage() {
           <input type="password" id="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
         </div>
 
-        {/* Botón para enviar el formulario */}
+        {/* btn para enviar el formulario */}
         <button type="submit" className={styles.authButton}>registrarse</button>
       </form>
 

@@ -1,22 +1,21 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Claves para guardar datos en el almacenamiento del navegador
 const USERS_DB_KEY = 'users-levelup-db';        // Para la base de datos de usuarios en localStorage
 const CURRENT_USER_KEY = 'currentUser-levelup'; // Para el usuario actual en sessionStorage
 
-// Función para obtener los usuarios guardados en localStorage
+// fn para obtener los usuarios guardados en localStorage
 const getUsersDatabase = () => {
   try {
     const users = localStorage.getItem(USERS_DB_KEY);
-    // Si hay usuarios, los convertimos de texto JSON a objeto JavaScript
+    // Si hay usuarios, JSON a objeto JavaScript
     return users ? JSON.parse(users) : [];
   } catch (e) {
-    // Si hay error (por ejemplo, JSON corrupto), devolvemos array vacío
+    // Si hay error, devolvemos array vacío
     return [];
   }
 };
 
-// Función para guardar usuarios en localStorage
+// fn para guardar usuarios en localStorage
 const setUsersDatabase = (users) => {
   localStorage.setItem(USERS_DB_KEY, JSON.stringify(users));
 };
@@ -31,12 +30,14 @@ export const useAuth = () => {
 
 // Proveedor del contexto de autenticación
 export function AuthProvider({ children }) {
-  // Estado para guardar todos los usuarios registrados
+// Estado que guardan
+
+  // La lista completa de usuarios registrados
   const [users, setUsers] = useState(getUsersDatabase());
   
-  // Estado para guardar el usuario que ha iniciado sesión
-  // Se inicializa con los datos de sessionStorage si existen
+  // El usuario que tiene la sesión activa en este momento
   const [currentUser, setCurrentUser] = useState(() => {
+  //Cuando la app carga, revisamos si hay alguien guardado en sessionStorage para mantener la sesión activa."
     try {
       const user = sessionStorage.getItem(CURRENT_USER_KEY);
       return user ? JSON.parse(user) : null;
@@ -61,7 +62,7 @@ export function AuthProvider({ children }) {
     }
   }, [currentUser]);
 
-  // Función para registrar un nuevo usuario
+  // fn para registrar un nuevo usuario
   const register = (userData) => {
     // Usamos una promesa para manejar el proceso asíncrono
     return new Promise((resolve, reject) => {
@@ -108,7 +109,7 @@ export function AuthProvider({ children }) {
     });
   };
 
-  // Función para iniciar sesión
+  // fn para iniciar sesión
   const login = (email, password) => {
     return new Promise((resolve, reject) => {
       // Buscamos el usuario por email
@@ -125,7 +126,7 @@ export function AuthProvider({ children }) {
     });
   };
 
-  // Función para cerrar sesión
+  // fn para cerrar sesión
   const logout = () => {
     // Simplemente establecemos currentUser a null
     // El useEffect se encargará de limpiar sessionStorage
@@ -135,9 +136,9 @@ export function AuthProvider({ children }) {
   // Valores que estarán disponibles para todos los componentes
   const value = {
     currentUser,  // Usuario actualmente logueado
-    register,     // Función para registrar nuevo usuario
-    login,        // Función para iniciar sesión
-    logout,       // Función para cerrar sesión
+    register,     // fn para registrar nuevo usuario
+    login,        // fn para iniciar sesión
+    logout,       // fn para cerrar sesión
   };
 
   // Proveemos el contexto a todos los componentes hijos

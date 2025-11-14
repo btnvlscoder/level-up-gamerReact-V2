@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Importamos íconos de Bootstrap para decorar los títulos
 import { 
   Crosshair, 
   Eye 

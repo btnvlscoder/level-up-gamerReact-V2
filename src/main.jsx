@@ -1,22 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Importamos React Router para la navegación entre páginas
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-// Importamos Toaster para mostrar notificaciones
 import { Toaster } from 'react-hot-toast';
-
-// Importamos Bootstrap para los estilos base
-import 'bootstrap/dist/css/bootstrap.min.css';
-// Importamos nuestros estilos personalizados
-import './style.css';
-
-// Importamos los proveedores de estado global (carrito y autenticación)
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
 
-// Importamos el layout principal y todas las páginas
 import MainLayout from './components/MainLayout';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
@@ -27,38 +18,36 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 
-// Configuramos las rutas de la aplicación
 const router = createBrowserRouter([
   {
-    // Ruta principal que usa MainLayout como plantilla
+    // Ruta principal usamos MainLayout 
     path: '/',
     element: <MainLayout />,
-    // Rutas hijas que se mostrarán dentro del MainLayout
+    // Rutas hijas
     children: [
-      { index: true, element: <HomePage /> }, // Página de inicio
-      { path: 'products', element: <ProductsPage /> }, // Catálogo de productos
-      { path: 'product/:code', element: <ProductDetailPage /> }, // Detalle de producto
-      { path: 'contact', element: <ContactPage /> }, // Formulario de contacto
-      { path: 'cart', element: <CartPage /> }, // Carrito de compras
-      { path: 'login', element: <LoginPage /> }, // Inicio de sesión
-      { path: 'register', element: <RegisterPage /> }, // Registro de usuario
-      { path: 'profile', element: <ProfilePage /> }, // Perfil de usuario
+      { index: true, element: <HomePage /> },
+      { path: 'products', element: <ProductsPage /> },
+      { path: 'product/:code', element: <ProductDetailPage /> },
+      { path: 'contact', element: <ContactPage /> },
+      { path: 'cart', element: <CartPage /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'register', element: <RegisterPage /> },
+      { path: 'profile', element: <ProfilePage /> },
     ],
   },
 ]);
 
-// Creamos el punto de entrada de React en el div con id "root"
+// Se conecta React con al #root
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// Renderizamos toda la aplicación
+// Renderizamos 
 root.render(
-  <React.StrictMode>
-    <AuthProvider>        {/* AuthProvider maneja el estado de autenticación (login, registro) */}
-      <CartProvider>      {/* CartProvider maneja el estado del carrito de compras */}
+  <React.StrictMode>                              {/* estados */}
+    <AuthProvider>                                {/* login, registro */}
+      <CartProvider>                              {/* carrito de compras */}
         <RouterProvider router={router} />        {/* RouterProvider maneja la navegación entre páginas */}      
         {/* Toaster muestra notificaciones en toda la app */}
-        <Toaster
-          position="top-right" // Posición de las notificaciones
+        <Toaster position="top-right" // Posición de las notificaciones
           toastOptions={{
             // todas las notf.
             style: {

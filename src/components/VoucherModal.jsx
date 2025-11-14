@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Importamos la función para formatear precios
 import { PriceFormat } from '../utils/formatter';
-// Importamos íconos de Bootstrap
 import { Receipt, Send, ArrowLeft, CheckCircleFill } from 'react-bootstrap-icons';
-// Importamos el contexto de autenticación para obtener el usuario actual
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
-
-// Importamos los estilos específicos de este componente
 import styles from './VoucherModal.module.css';
 
-// Componente modal que muestra el comprobante de compra
 export default function VoucherModal({ cart, subtotal, discount, cartTotal, onClose }) {
   // Obtenemos el usuario actual para pre-llenar el email
   const { currentUser } = useAuth();

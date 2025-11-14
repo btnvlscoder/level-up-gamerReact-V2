@@ -16,11 +16,6 @@
   z-index: 100; /* se asegura que este sobre el 'main' */
 }
 
-/* '.sidebar.active' se usa para el modo movil (cuando esta abierto) */
-.sidebar.active {
-  left: 0;
-}
-
 .logo {
   font-weight: 500;
   font-size: 1.75rem; 
@@ -113,26 +108,4 @@
   font-size: 0.75rem;
   margin-bottom: 1rem;
   font-family: 'Roboto', sans-serif;
-}
-
-/*
-   responsive (menu movil)
-*/
-@media (max-width: 968px) {
-  .sidebar {
-    position: fixed; /* cambia de 'sticky' a 'fixed' en movil */
-    left: -100%; /* oculto fuera de la pantalla por defecto */
-    top: 0;
-    height: 100vh;
-    width: 70%;
-    z-index: 100;
-    transition: left 0.3s ease; /* animacion de slide-in */
-    background-color: var(--clr-main);
-    padding: 2rem;
-  }
-  
-  /* cuando el 'aside' tiene la clase 'active', se desliza a la vista */
-  .sidebar.active {
-    left: 0;
-  }
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // Importamos el contexto del carrito para manejar los productos
 import { useCart } from '../context/CartContext';
-// Importamos la función para formatear precios
+// Importamos la fn para formatear precios
 import { PriceFormat } from '../utils/formatter';
 // Importamos íconos de Bootstrap
 import { EmojiFrown, Trash, ArrowLeft } from 'react-bootstrap-icons';
@@ -37,7 +37,7 @@ export default function CartPage() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  // Función para manejar la compra
+  // fn para manejar la compra
   const handleCompra = () => {
     // Si el usuario no está logueado, mostramos error y redirigimos al login
     if (!currentUser) {
@@ -60,7 +60,7 @@ export default function CartPage() {
     clearCart();
   };
 
-  // Función para cerrar el modal del voucher
+  // fn para cerrar el modal del voucher
   const handleCloseVoucher = () => {
     setShowVoucher(false);
   };
@@ -69,7 +69,7 @@ export default function CartPage() {
   if (cart.length === 0 && !showVoucher) {
     return (
       <div className={styles.contenedorCarrito}>
-        <h2 className="titulo-principal">carro de compras</h2>
+        <h2 className="titulo-principal">Carro de Compras</h2>
         <p className={styles.carritoVacio}>
           tu carrito esta vacio <EmojiFrown />
         </p>

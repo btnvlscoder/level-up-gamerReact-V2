@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 
-// Importamos el contexto de autenticación para usar la función de login
 import { useAuth } from '../context/AuthContext';
-// Importamos useNavigate para redirigir después del login
 import { useNavigate } from 'react-router-dom';
-// Importamos toast para mostrar notificaciones
 import toast from 'react-hot-toast';
 
-// Importamos los estilos específicos de esta página
 import styles from './Auth.module.css';
 
 export default function LoginPage() {
