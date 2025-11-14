@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   {
     // Ruta principal usamos MainLayout 
     path: '/',
-    element: <MainLayout />,
+    element: <MainLayout />,//contenedor principal
     // Rutas hijas
     children: [
       { index: true, element: <HomePage /> },

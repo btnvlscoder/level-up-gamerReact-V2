@@ -1,8 +1,6 @@
 /*
    pruebas unitarias para cartReducer
 */
-import { describe, it, expect } from 'vitest';
-// importamos el reducer y las acciones que vamos a probar
 import { cartReducer, ACTIONS } from './CartContext.jsx'; 
 
 // 'mockproduct' es un objeto de prueba simulando un producto
@@ -36,7 +34,7 @@ describe('cartReducer', () => {
     const initialState = [
       { ...mockProduct, quantity: 1 }
     ];
-    const action = { type: ACTIONS.ADD_ITEM, payload: mockProduct }; // anadimos el mismo catan
+    const action = { type: ACTIONS.ADD_ITEM, payload: mockProduct }; 
     
     // 2. act
     const newState = cartReducer(initialState, action);

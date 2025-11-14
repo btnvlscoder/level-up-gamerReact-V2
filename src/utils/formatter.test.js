@@ -2,9 +2,6 @@
    pruebas unitarias para formatter.js
 */
 
-// importamos las herramientas de testing de vitest
-import { describe, it, expect } from 'vitest';
-// importamos la funcion que queremos probar
 import { PriceFormat } from './formatter.js';
 
 // 'describe' agrupa pruebas relacionadas bajo un mismo titulo

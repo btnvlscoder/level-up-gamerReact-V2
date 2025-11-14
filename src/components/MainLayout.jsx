@@ -8,7 +8,7 @@ function MainLayout() {
       {/* MENU NAV */}
       <Header />
       <main>
-      {/* RENDERIZADO DE PAGINAS*/}
+      {/* R.ROUTER HACE LA INYECCION DE PAGINAS*/}
         <Outlet />
       </main>
     </div>

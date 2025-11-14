@@ -127,9 +127,9 @@ export function CartProvider({ children }) {
 
   // Cálculos de totales que se memorizan para mejor rendimiento
   const { totalItems, subtotal, discount, cartTotal } = useMemo(() => {
-    // Calculamos el total de items (sumando todas las cantidades)
+    // sumando todas las cantidades
     const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-    // Calculamos el subtotal (precio * cantidad de cada producto)
+    // Calculamos el precio * cantidad de cada producto
     const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     
     let discount = 0;
