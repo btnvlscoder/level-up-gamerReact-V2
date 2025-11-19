@@ -1,0 +1,111 @@
+/*
+   estilos para header.jsx
+*/
+
+/* '.sidebar' es el estilo base del 'aside' (barra lateral) */
+.sidebar {
+  padding: 2rem;
+  padding-right: 0;
+  color: var(--clr-white);
+  position: sticky; /* se mantiene fijo al hacer scroll */
+  top: 0;
+  height: 100vh; /* altura completa de la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* empuja el footer hacia abajo */
+  z-index: 100; /* se asegura que este sobre el 'main' */
+}
+
+.logo {
+  font-weight: 500;
+  font-size: 1.75rem; 
+  color: var(--clr-accent-blue);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logojpg {
+  border-radius: 2rem;
+  display: block;
+  max-width: 200px;
+  margin: 1rem auto;
+  transform: translateX(-25px); /* truco visual para centrarlo con el menu */
+}
+
+/*
+   menu
+*/
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+/* estilo base para cada boton/enlace del menu */
+.botonMenu {
+  background-color: transparent;
+  border: 0;
+  color: var(--clr-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  padding: 1rem;
+  font-size: .8rem;
+}
+
+/* '.botonmenu.active' es el estilo para el enlace de la pagina actual */
+.botonMenu.active {
+  background-color: var(--clr-main-light);
+  color: var(--clr-accent-green);
+  width: 100%;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  position: relative;
+}
+
+/* '::after' y '::before' crean el efecto de curva (scoop)
+   conectando el menu activo con el fondo del 'main'.
+*/
+.botonMenu.active:after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 2rem;
+  bottom: 100%;
+  right: 0;
+  background-color: transparent;
+  border-bottom-right-radius: 1rem;
+  box-shadow: 0 1rem 0 var(--clr-main-light);
+}
+
+.botonMenu.active:before {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 2rem;
+  top: 100%;
+  right: 0;
+  background-color: transparent;
+  border-top-right-radius: 1rem;
+  box-shadow: 0 -1rem 0 var(--clr-main-light);
+}
+
+.botonCarrito {
+  margin-top: 2rem; /* espacio extra sobre el boton del carrito */
+}
+
+.textoFooter {
+  color: var(--clr-gray);
+  font-size: 0.85rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.textoSmallFooter {
+  color: var(--clr-gray);
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  font-family: 'Roboto', sans-serif;
+}

@@ -1,0 +1,92 @@
+/*
+   estilos para productsPage.jsx
+*/
+
+/* '.productstoolbar' es el contenedor para el filtro y el buscador */
+.productosToolbar {
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  margin-bottom:1.5rem;
+}
+
+/* '.buscador' es el input de texto para buscar */
+.buscador {
+  flex:1; /* hace que el buscador ocupe el espacio disponible */
+  padding:.6rem;
+  border-radius:.5rem;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--clr-white);
+  border: 1px solid var(--clr-accent-blue);
+}
+
+/* '.filtrocategoria' es el <select> para filtrar por categoria */
+.filtroCategoria {
+  padding:.5rem;
+  border-radius:.5rem;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--clr-white);
+  border: 1px solid var(--clr-accent-blue);
+}
+
+/* '.filtrocategoria option' asegura que el dropdown sea legible en tema oscuro */
+.filtroCategoria option {
+  background-color: var(--clr-main-light);
+  color: var(--clr-white);
+}
+
+/* '.noresultados' es el mensaje que aparece si la busqueda no arroja resultados */
+.noResultados {
+  background-color: var(--clr-main);
+  border: 1px solid var(--clr-accent-blue);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin: 2rem auto;
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--clr-accent-green);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  max-width: 600px;
+}
+
+.noResultados i {
+  color: var(--clr-accent-blue);
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+}
+
+/* '.contenedorproductos' es el grid que organiza las productcard */
+.contenedorProductos {
+  display: grid;
+  /* 4 columnas en desktop */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+
+/*
+   responsive
+*/
+
+/* 3 columnas en pantallas mas pequenas (ej. tablets) */
+@media (max-width: 1200px) {
+  .contenedorProductos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 2 columnas en pantallas aun mas pequenas */
+@media (max-width: 900px) {
+  .contenedorProductos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 1 columna en moviles */
+@media (max-width: 600px) {
+  .contenedorProductos {
+    grid-template-columns: 1fr;
+  }
+}

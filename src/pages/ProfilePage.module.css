@@ -1,0 +1,135 @@
+/*
+   estilos para profilePage.jsx
+*/
+
+/* '.profilepage' es el contenedor principal de la pagina de perfil */
+.profilePage {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: var(--clr-main);
+  border: 1px solid var(--clr-accent-green);
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  color: var(--clr-white);
+}
+
+/* '.profileheader' es la seccion superior con el icono y datos del usuario */
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--clr-accent-blue);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.profileHeader .icon {
+  font-size: 4rem;
+  color: var(--clr-accent-blue);
+}
+
+.profileHeader h3 {
+  font-size: 1.5rem;
+  color: var(--clr-white);
+  margin: 0;
+  font-family: 'Roboto', sans-serif; 
+}
+
+.profileHeader .email {
+  font-size: 1rem;
+  color: var(--clr-gray);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* estilo general para los parrafos de informacion */
+.profileInfo p {
+  font-size: 1.1rem;
+  color: var(--clr-gray);
+  line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* '.discountbanner' es el estilo base para los banners de descuento */
+.discountBanner {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* modificador para el banner de descuento 'duoc' (fondo claro) */
+.discountBanner.duoc {
+  background-color: #f0fdf4;
+  border: 1px solid var(--clr-accent-green);
+  color: #222; /* color de texto oscuro por defecto para este banner */
+}
+
+/* modificador para el banner 'no duoc' (fondo oscuro) */
+.discountBanner.noDuoc {
+  background-color: var(--clr-main-light); 
+  border: 1px solid #facc15;
+  color: var(--clr-white); 
+}
+
+.discountBanner.noDuoc h4 {
+  color: #facc15; 
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 0.5rem;
+}
+.discountBanner.noDuoc p {
+    color: var(--clr-gray); 
+}
+
+.discountBanner.duoc h4 {
+  color: #166534;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+/* esta regla asegura que el parrafo dentro del banner .duoc
+   sea oscuro, sobrescribiendo la regla general de '.profileinfo p'
+*/
+.discountBanner.duoc p {
+  color: #222; /* color de texto oscuro (negro) */
+  font-size: 1rem; 
+}
+
+
+/* estilos para el boton de cerrar sesion */
+.profileLogoutButton {
+  display: block; 
+  margin: 2rem auto 0 auto; 
+  width: 50%;
+  max-width: 300px;
+  background-color: var(--clr-accent-red);
+  color: var(--clr-white);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 4px 15px rgba(255, 51, 51, 0.5);
+}
+
+.profileLogoutButton:hover {
+  background-color: #ff6666; 
+  transform: translateY(-2px);
+}
+
+/* responsivo para el contenedor de perfil */
+@media (max-width: 600px) {
+  .profilePage {
+    margin: 1rem 0.5rem;
+    padding: 1.5rem;
+  }
+  
+  .profileLogoutButton {
+      width: 100%;
+  }
+}

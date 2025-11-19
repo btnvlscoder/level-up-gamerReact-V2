@@ -1,0 +1,237 @@
+/*
+   estilos para ProductDetailPage.jsx
+*/
+
+/* contenedor principal de toda la pagina de detalle */
+.productoDetalleContainer {
+  padding: 2rem;
+  background-color: var(--clr-main-light);
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* el contenedor que usa flexbox para poner el slider (izquierda) y la info (derecha) */
+.productoDetalle {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  background-color: rgba(20, 20, 25, 0.8);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--clr-accent-blue);
+}
+
+/*
+   slider y miniaturas
+*/
+
+/* contenedor de la galeria de imagenes (slider + botones + miniaturas) */
+.productoSlider {
+  position: relative; /* para posicionar los botones 'prev' y 'next' */
+  width: 50%;
+  min-width: 300px;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+}
+
+/* el marco negro donde se muestra la imagen principal */
+.sliderContainer {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* la imagen principal dentro del slider */
+.sliderImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* asegura que la imagen se vea completa sin distorsionarse */
+  display: block; 
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* estilo para los botones de flecha (prev/next) */
+.sliderBtn {
+  position: absolute; /* posicionados sobre el '.productoslider' */
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 144, 255, 0.8);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.8rem;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.sliderBtn:hover {
+  background: var(--clr-accent-blue);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sliderBtn.prev { 
+  left: 15px; 
+}
+.sliderBtn.next { 
+  right: 15px; 
+}
+
+/* contenedor para las imagenes pequenas (miniaturas) */
+.miniaturasContainer {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* estilo para cada imagen miniatura */
+.miniatura {
+  width: 60px;
+  height: 60px;
+  object-fit: cover; /* corta la imagen para que llene el espacio */
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.miniatura:hover {
+  transform: scale(1.1);
+  border-color: var(--clr-accent-blue);
+}
+
+/* clase 'active' para la miniatura que esta seleccionada */
+.miniatura.active {
+  border-color: var(--clr-accent-green);
+  transform: scale(1.1);
+}
+
+/*
+   info detalle
+*/
+
+/* contenedor de la informacion del producto (columna derecha) */
+.productoInfo {
+  flex: 1; /* ocupa el espacio restante */
+  color: var(--clr-white);
+  padding: 1rem;
+}
+
+/* estilos especificos para el texto en esta pagina */
+.productoTituloDetalle {
+  font-size: 2.2rem;
+  color: var(--clr-accent-green);
+  margin-bottom: 0.5rem;
+}
+.productoMarcaDetalle {
+  font-size: 1rem;
+  color: var(--clr-gray);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.productoCodigo, .productoCategoria {
+  font-size: 0.9rem;
+  color: var(--clr-gray);
+  margin-bottom: 0.25rem;
+}
+
+/* caja de descripcion con borde izquierdo azul */
+.productoDescripcion {
+  color: var(--clr-gray);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 1.5rem 0;
+  font-family: 'Roboto', sans-serif;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--clr-accent-blue);
+}
+
+.productoPrecio {
+  font-size: 2rem;
+  color: var(--clr-accent-green);
+  margin: 1.5rem 0;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* contenedor para los botones (agregar al carrito, volver) */
+.accionesBotones {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* estilo para el boton "agregar al carrito" especifico de esta pagina */
+.productoAgregar {
+  border: 0;
+  background-color: var(--clr-accent-blue);
+  color: var(--clr-gray);
+  padding: .75rem 1.5rem;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color .3s, color .3s;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.productoAgregar:hover {
+  background-color: var(--clr-accent-green);
+  color: var(--clr-main);
+}
+
+
+/*
+   responsive
+*/
+@media (max-width: 968px) {
+  /* en tablets, el layout pasa de 2 columnas (flex) a 1 (column) */
+  .productoDetalle {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .productoSlider {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  /* en movil, los botones se apilan verticalmente */
+  .accionesBotones {
+    flex-direction: column;
+  }
+  
+  /* ':global(.btn-volver)' permite aplicar estilos a una clase global (de style.css)
+     desde dentro de un modulo css.
+  */
+  .productoAgregar,
+  :global(.btn-volver) {
+    width: 100%;
+    justify-content: center;
+  }
+}
