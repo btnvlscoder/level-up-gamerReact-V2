@@ -78,7 +78,7 @@ export default function RegisterPage() {
         {/* Campos del formulario */}
         <FormField
           id="rut"
-          label="rut (ej: 12345678-9)"
+          label="Rut (ej: 12345678-9)"
           type="text"
           value={formData.rut}
           onChange={handleChange}
@@ -87,7 +87,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="nombre"
-          label="nombre"
+          label="Nombre"
           type="text"
           value={formData.nombre}
           onChange={handleChange}
@@ -96,7 +96,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="apellidoPaterno"
-          label="apellido paterno"
+          label="Apellido paterno"
           type="text"
           value={formData.apellidoPaterno}
           onChange={handleChange}
@@ -105,7 +105,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="apellidoMaterno"
-          label="apellido materno"
+          label="Apellido materno"
           type="text"
           value={formData.apellidoMaterno}
           onChange={handleChange}
@@ -114,7 +114,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="email"
-          label="correo electronico"
+          label="Correo electronico"
           type="email"
           value={formData.email}
           onChange={handleChange}
@@ -123,7 +123,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="password"
-          label="contrasena (min. 6 caracteres)"
+          label="Contrasena (min. 6 caracteres)"
           type="password"
           value={formData.password}
           onChange={handleChange}
@@ -132,7 +132,7 @@ export default function RegisterPage() {
         />
         <FormField
           id="confirmPassword"
-          label="confirmar contrasena"
+          label="Confirmar contrasena"
           type="password"
           value={formData.confirmPassword}
           onChange={handleChange}
@@ -146,7 +146,7 @@ export default function RegisterPage() {
 
       {/* Enlace para ir a la página de login si ya tiene cuenta */}
       <div className={styles.authSwitchLink}>
-        ¿ya tienes cuenta? <a onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>inicia sesion</a>
+        ¿Ya tienes cuenta? <a onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>Inicia sesion</a>
       </div>
     </div>
   );
