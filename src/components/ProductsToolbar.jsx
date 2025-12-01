@@ -3,7 +3,7 @@ import React from 'react';
 import { Search } from 'react-bootstrap-icons';
 import styles from '../pages/ProductsPage.module.css';
 
-export default function ProductsToolbar({ categorias, categoria, setCategoria, terminoBusqueda, setTerminoBusqueda }) {
+function ProductsToolbar({ categorias, categoria, setCategoria, terminoBusqueda, setTerminoBusqueda }) {
   return (
     <div className={styles.productosToolbar}>
       <select
@@ -31,3 +31,5 @@ export default function ProductsToolbar({ categorias, categoria, setCategoria, t
     </div>
   );
 }
+
+export default React.memo(ProductsToolbar);

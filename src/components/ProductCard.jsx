@@ -5,7 +5,7 @@ import { Cart } from "react-bootstrap-icons";
 import { PriceFormat } from '../utils/formatter.js';
 
 import { useCart } from '../context/CartContext';
-import toast from 'react-hot-toast';
+import { notifyAddToCart } from '../utils/notifications.js';
 
 import styles from './ProductCard.module.css';
 
@@ -20,8 +20,8 @@ function ProductCard({ product }) {
 
   // fn para el btn "Agregar al carrito"
   const handleAddToCart = () => {
-    addItem(product); 
-    toast.success(`"${name}" agregado al carrito!`); // noti existosa
+    addItem(product);
+    notifyAddToCart(name);
   }
 
   return (

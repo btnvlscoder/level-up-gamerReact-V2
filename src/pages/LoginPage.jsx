@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import styles from './Auth.module.css';
+import FormField from '../components/FormField';
 
 export default function LoginPage() {
   // Estados para guardar el email y contraseña del formulario
@@ -52,28 +53,26 @@ export default function LoginPage() {
         {error && <div className={styles.authError}>{error}</div>}
 
         {/* Campo para el email */}
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Correo electronico</label>
-          <input
-            type="email"
-            id="email"
-            value={email} // Valor controlado por el estado
-            onChange={(e) => setEmail(e.target.value)} // Actualizamos el estado cuando escribe
-            required
-          />
-        </div>
+        <FormField
+          id="email"
+          label="Correo electronico"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          containerClass={styles.formGroup}
+        />
 
         {/* Campo para la contraseña */}
-        <div className={styles.formGroup}>
-          <label htmlFor="password">Contrasena</label>
-          <input
-            type="password"
-            id="password"
-            value={password} // Valor controlado por el estado
-            onChange={(e) => setPassword(e.target.value)} // Actualizamos el estado cuando escribe
-            required
-          />
-        </div>
+        <FormField
+          id="password"
+          label="Contrasena"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          containerClass={styles.formGroup}
+        />
 
         {/* Botón para enviar el formulario */}
         <button type="submit" className={styles.authButton}>Entrar</button>

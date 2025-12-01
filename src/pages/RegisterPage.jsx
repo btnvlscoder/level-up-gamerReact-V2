@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 import styles from './Auth.module.css';
+import FormField from '../components/FormField';
 
 export default function RegisterPage() {
   // Estado para guardar todos los datos del formulario
@@ -75,34 +76,69 @@ export default function RegisterPage() {
         {error && <div className={styles.authError}>{error}</div>}
 
         {/* Campos del formulario */}
-        <div className={styles.formGroup}>
-          <label htmlFor="rut">rut (ej: 12345678-9)</label>
-          <input type="text" id="rut" value={formData.rut} onChange={handleChange} required />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="nombre">nombre</label>
-          <input type="text" id="nombre" value={formData.nombre} onChange={handleChange} required />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="apellidoPaterno">apellido paterno</label>
-          <input type="text" id="apellidoPaterno" value={formData.apellidoPaterno} onChange={handleChange} required />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="apellidoMaterno">apellido materno</label>
-          <input type="text" id="apellidoMaterno" value={formData.apellidoMaterno} onChange={handleChange} required />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="email">correo electronico</label>
-          <input type="email" id="email" value={formData.email} onChange={handleChange} required />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="password">contrasena (min. 6 caracteres)</label>
-          <input type="password" id="password" value={formData.password} onChange={handleChange} required />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="confirmPassword">confirmar contrasena</label>
-          <input type="password" id="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
-        </div>
+        <FormField
+          id="rut"
+          label="rut (ej: 12345678-9)"
+          type="text"
+          value={formData.rut}
+          onChange={handleChange}
+          required
+          containerClass={styles.formGroup}
+        />
+        <FormField
+          id="nombre"
+          label="nombre"
+          type="text"
+          value={formData.nombre}
+          onChange={handleChange}
+          required
+          containerClass={styles.formGroup}
+        />
+        <FormField
+          id="apellidoPaterno"
+          label="apellido paterno"
+          type="text"
+          value={formData.apellidoPaterno}
+          onChange={handleChange}
+          required
+          containerClass={styles.formGroup}
+        />
+        <FormField
+          id="apellidoMaterno"
+          label="apellido materno"
+          type="text"
+          value={formData.apellidoMaterno}
+          onChange={handleChange}
+          required
+          containerClass={styles.formGroup}
+        />
+        <FormField
+          id="email"
+          label="correo electronico"
+          type="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          containerClass={styles.formGroup}
+        />
+        <FormField
+          id="password"
+          label="contrasena (min. 6 caracteres)"
+          type="password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          containerClass={styles.formGroup}
+        />
+        <FormField
+          id="confirmPassword"
+          label="confirmar contrasena"
+          type="password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          required
+          containerClass={styles.formGroup}
+        />
 
         {/* btn para enviar el formulario */}
         <button type="submit" className={styles.authButton}>registrarse</button>

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { PriceFormat } from '../utils/formatter';
-import { Receipt, ArrowLeft } from 'react-bootstrap-icons';
+import { Receipt } from 'react-bootstrap-icons';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import styles from './VoucherModal.module.css';
 import VoucherItemsList from './VoucherItemsList';
 import VoucherTotalSummary from './VoucherTotalSummary';
 import VoucherEmailForm from './VoucherEmailForm';
+import BackToCatalogLink from './BackToCatalogLink';
 
 export default function VoucherModal({ cart, subtotal, discount, cartTotal, onClose }) {
   // Obtenemos el usuario actual para pre-llenar el email
@@ -81,9 +82,7 @@ export default function VoucherModal({ cart, subtotal, discount, cartTotal, onCl
         {/* Botones de acción del modal */}
         <div className={styles.voucherActions}>
           {/* Botón para volver al catálogo */}
-          <button className="btn-volver" onClick={handleCloseAndNavigate}>
-            <ArrowLeft /> volver al catalogo
-          </button>
+          <BackToCatalogLink onClick={handleCloseAndNavigate} />
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ export default function useImageSlider(images) {
 
   useEffect(() => {
     setCurrentIndex((idx) => (idx >= normalized.length ? 0 : idx));
-  }, [images]);
+  }, [normalized.length]);
 
   const prevSlide = () => {
     setCurrentIndex((idx) => (idx === 0 ? normalized.length - 1 : idx - 1));

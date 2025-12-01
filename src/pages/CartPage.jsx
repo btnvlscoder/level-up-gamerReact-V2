@@ -5,8 +5,8 @@ import { useCart } from '../context/CartContext';
 // Importamos la fn para formatear precios
 
 // Importamos íconos de Bootstrap
-import { EmojiFrown, ArrowLeft } from 'react-bootstrap-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { EmojiFrown } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 // Importamos el modal del voucher que se muestra después de comprar
 import VoucherModal from '../components/VoucherModal';
 // Importamos el contexto de autenticación para verificar si el usuario está logueado
@@ -17,6 +17,7 @@ import toast from 'react-hot-toast';
 import styles from './CartPage.module.css';
 import CartItem from '../components/CartItem';
 import CartSummary from '../components/CartSummary';
+import BackToCatalogLink from '../components/BackToCatalogLink';
 
 export default function CartPage() {
   // Estado para controlar si mostrar el modal del voucher
@@ -76,9 +77,9 @@ export default function CartPage() {
           tu carrito esta vacio <EmojiFrown />
         </p>
         {/* Enlace para volver al catálogo */}
-        <Link to="/products" className="btn-volver" style={{ textDecoration: 'none', display: 'inline-flex', margin: '0 auto' }}>
-          <ArrowLeft /> ir al catalogo
-        </Link>
+        <BackToCatalogLink style={{ textDecoration: 'none', display: 'inline-flex', margin: '0 auto' }}>
+          ir al catalogo
+        </BackToCatalogLink>
       </div>
     );
   }

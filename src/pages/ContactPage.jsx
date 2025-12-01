@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 
 // Importamos los estilos específicos de esta página
 import styles from './ContactPage.module.css';
+import FormField from '../components/FormField';
 
 export default function ContactPage() {
   // Estados para guardar los datos del formulario de contacto
@@ -39,53 +40,46 @@ export default function ContactPage() {
         
         {/* Formulario de contacto */}
         <form className={styles.contactoFormSimple} onSubmit={handleSubmit}>
-          {/* Campo para el nombre */}
-          <div className={styles.txtFormulario}>
-            <label htmlFor="nombre">Nombre Completo</label>
-            <input
-              type="text"
-              id="nombre"
-              required
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-            />
-          </div>
+          <FormField
+            id="nombre"
+            label="Nombre Completo"
+            type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            required
+            containerClass={styles.txtFormulario}
+          />
 
-          {/* Campo para el correo */}
-          <div className={styles.txtFormulario}>
-            <label htmlFor="correo">Correo electronico</label>
-            <input
-              type="email"
-              id="correo"
-              required
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
-            />
-          </div>
+          <FormField
+            id="correo"
+            label="Correo electronico"
+            type="email"
+            value={correo}
+            onChange={(e) => setCorreo(e.target.value)}
+            required
+            containerClass={styles.txtFormulario}
+          />
 
-          {/* Campo para el asunto */}
-          <div className={styles.txtFormulario}>
-            <label htmlFor="asunto">Asunto</label>
-            <input
-              type="text"
-              id="asunto"
-              required
-              value={asunto}
-              onChange={(e) => setAsunto(e.target.value)}
-            />
-          </div>
+          <FormField
+            id="asunto"
+            label="Asunto"
+            type="text"
+            value={asunto}
+            onChange={(e) => setAsunto(e.target.value)}
+            required
+            containerClass={styles.txtFormulario}
+          />
 
-          {/* Campo para el mensaje (textarea) */}
-          <div className={styles.txtFormulario}>
-            <label htmlFor="mensaje">Mensaje</label>
-            <textarea
-              id="mensaje"
-              rows="5"
-              required
-              value={mensaje}
-              onChange={(e) => setMensaje(e.target.value)}
-            />
-          </div>
+          <FormField
+            id="mensaje"
+            label="Mensaje"
+            type="textarea"
+            rows={5}
+            value={mensaje}
+            onChange={(e) => setMensaje(e.target.value)}
+            required
+            containerClass={styles.txtFormulario}
+          />
 
           {/* Botón para enviar el formulario */}
           <button type="submit" className={styles.btnEnviar}>Enviar mensaje</button>
