@@ -138,7 +138,7 @@
       code: "PP001",
       category: "Poleras Personalizadas",
       signature: "LEVEL-UP",
-      name: "Polera Gamer Personalizada 'Level-Up'",
+      name: "Polera Gamer Personalizada Level-Up",
       price: 14990,
       description: "camiseta comoda y estilizada, personalizable con tu gamer tag o diseno favorito.",
       img: [

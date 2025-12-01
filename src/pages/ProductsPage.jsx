@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import products from '../data/products';
+import React, { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard';
 import styles from './ProductsPage.module.css';
 import useProductsFilter from '../hooks/useProductsFilter';
 import ProductsToolbar from '../components/ProductsToolbar';
+import { getProducts } from '../services/productService';
 
 
 export default function ProductsPage() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    getProducts()
+      .then((res) => { if (active) setData(res); })
+      .catch(() => { if (active) setData([]); });
+    return () => { active = false; };
+  }, []);
+
   const {
     categoria,
     setCategoria,
@@ -14,7 +24,7 @@ export default function ProductsPage() {
     setTerminoBusqueda,
     categorias,
     productosFiltrados,
-  } = useProductsFilter(products);
+  } = useProductsFilter(data);
 
   return (
     <>
