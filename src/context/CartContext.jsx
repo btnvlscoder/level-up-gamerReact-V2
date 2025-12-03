@@ -12,24 +12,24 @@ export const ACTIONS = {
   CLEAR_CART: 'CLEAR_CART',       // Vaciar todo el carrito
 };
 
-// fn reductora que maneja todas las acciones del carrito
+// REDUCER en lugar de State simple para centralizar lógica compleja
 export function cartReducer(state, action) {
   switch (action.type) {
-    // Agregar un producto al carrito
+    // AGREGAR AL CARRITO
     case ACTIONS.ADD_ITEM: {
       const product = action.payload;
-      // Verificamos si el producto ya está en el carrito
+      // Verifico existencia para NO duplicar filas, sino sumar cantidad
       const existingItem = state.find(item => item.code === product.code);
 
       if (existingItem) {
-        // Si ya existe, aumentamos la cantidad en 1
+        // Creo copia del array con .map y actualizo solo el item modificado
         return state.map(item =>
           item.code === product.code
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        // Si no existe, lo agregamos con cantidad 1
+        // Si es nuevo, lo agrego al array inicializando cantidad en 1
         return [...state, { ...product, quantity: 1 }];
       }
     }
@@ -96,14 +96,13 @@ export function useCart() {
 
 // Proveedor del contexto del carrito
 export function CartProvider({ children }) {
-  // useReducer maneja el estado del carrito con todas las acciones posibles
-  // getInitialCart carga el carrito guardado en localStorage al iniciar
+  // Estado global inicializado con LocalStorage (persistencia)
   const [cart, dispatch] = useReducer(cartReducer, [], getInitialCart);
   
   // Obtenemos el usuario actual para aplicar descuentos
   const { currentUser } = useAuth();
 
-  // Efecto que guarda el carrito en localStorage cada vez que cambia
+  // Efecto secundario para sincronizar cambios con LocalStorage automáticamente
   useEffect(() => {
     localStorage.setItem('cart-levelup', JSON.stringify(cart));
   }, [cart]);
@@ -125,7 +124,7 @@ export function CartProvider({ children }) {
     dispatch({ type: ACTIONS.CLEAR_CART });
   };
 
-  // Cálculos de totales que se memorizan para mejor rendimiento
+  // OPTIMIZACION con useMEMO. Solo recalcula totales si cambia el carrito o el usuario
   const { totalItems, subtotal, discount, cartTotal } = useMemo(() => {
     // sumando todas las cantidades
     const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);

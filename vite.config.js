@@ -15,6 +15,9 @@ export default defineConfig({
     globals: true,
     // 'environment' simula un entorno de navegador (con jsdom) para poder testear componentes de react.
     environment: 'jsdom',
+    // Fuerza que archivos .js/.jsx se transformen en modo "web" en Vitest
+    // evitando transformaciones SSR que introducen helpers como __vite_ssr_exportName__
+    transformMode: { web: [/\.jsx?$/] },
     // 'setupFiles' es un archivo que se ejecuta antes de todas las suites de test.
     // lo usamos para configurar jest-dom globalmente a través de nuestro archivo setupTests.js.
     setupFiles: './src/setupTests.js', 
