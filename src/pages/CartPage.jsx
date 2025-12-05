@@ -13,11 +13,9 @@ import CartSummary from '../components/CartSummary';
 import BackToCatalogLink from '../components/BackToCatalogLink';
 
 export default function CartPage() {
-  // Estado para controlar si mostrar el modal del voucher
   const [showVoucher, setShowVoucher] = useState(false);
   
   // Estados para guardar una "foto" del carrito al momento de comprar
-  // (necesario porque clearCart() borra el carrito principal)
   const [voucherCart, setVoucherCart] = useState([]);
   const [voucherSubtotal, setVoucherSubtotal] = useState(0);
   const [voucherDiscount, setVoucherDiscount] = useState(0);

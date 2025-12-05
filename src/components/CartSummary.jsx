@@ -1,4 +1,3 @@
-// s:\PROGRAM\DUOC\4th Semester\P2\level-up-gamerReact-V2\src\components\CartSummary.jsx
 import React from 'react';
 import { PriceFormat } from '../utils/formatter';
 import styles from '../pages/CartPage.module.css';
