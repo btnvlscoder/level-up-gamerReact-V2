@@ -32,7 +32,7 @@ function ProductCard({ product }) {
         <img className={styles.productImg} src={imageUrl} alt={name} />
       </Link>
       
-      {/* Contenedor con la información del producto */}
+      {/* Contenedor con la info del producto */}
       <div className={styles.productDetails}>
         {/* Mostramos la marca del producto si existe */}
         {signature && <p className={styles.productSignature}>{signature}</p>}

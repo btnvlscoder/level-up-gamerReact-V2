@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/28</span>
+                <span class='fraction'>0/34</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/28</span>
+                <span class='fraction'>0/34</span>
             </div>
         
             
@@ -92,7 +92,11 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -120,21 +124,31 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import localProducts from '../data/products';</span></span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import localProducts from '../data/products';</span></span></span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >// normalizacion de datos para el match con backend</span>
 <span class="cstat-no" title="statement not covered" >const normalize = (s) =&gt; (typeof s === 'string' ? s.trim().toLowerCase() : '');</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >// ASYNC para manejar la promesa sin bloquear el hilo principal</span>
 <span class="cstat-no" title="statement not covered" >export async function getProducts() {</span>
 <span class="cstat-no" title="statement not covered" >  let backendProducts = [];</span>
+<span class="cstat-no" title="statement not covered" >  </span>
+<span class="cstat-no" title="statement not covered" >  // conexion al backend</span>
 <span class="cstat-no" title="statement not covered" >  try {</span>
 <span class="cstat-no" title="statement not covered" >    const res = await fetch('http://localhost:8080/products');</span>
 <span class="cstat-no" title="statement not covered" >    const data = await res.json();</span>
 <span class="cstat-no" title="statement not covered" >    backendProducts = Array.isArray(data) ? data : [];</span>
 <span class="cstat-no" title="statement not covered" >  } catch {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  // diccionario local normalizado para el match  </span>
 <span class="cstat-no" title="statement not covered" >  const localByName = new Map(localProducts.map(p =&gt; [normalize(p.name), p]));</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  // match con backend</span>
 <span class="cstat-no" title="statement not covered" >  return backendProducts.map((b) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const match = localByName.get(normalize(b.name));</span>
 <span class="cstat-no" title="statement not covered" >    const img = match?.img &amp;&amp; match.img.length ? match.img : ['/img/placeholder.jpg'];</span>
@@ -148,16 +162,14 @@
 <span class="cstat-no" title="statement not covered" >      img,</span>
 <span class="cstat-no" title="statement not covered" >    };</span>
 <span class="cstat-no" title="statement not covered" >  });</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;
-&nbsp;</pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >}</span></pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-01T07:36:40.868Z
+                at 2025-12-05T03:11:59.790Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -1,25 +1,21 @@
 import React from 'react';
-
-// Importamos hooks de React Router para obtener parámetros de la URL y navegar
 import { useParams } from 'react-router-dom';
 import products from '../data/products';
 import { Cart, ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import { PriceFormat } from '../utils/formatter.js';
 import { useCart } from '../context/CartContext';
 import { notifyAddToCart } from '../utils/notifications.js';
-
-// Importamos los estilos específicos de esta página
 import styles from './ProductDetailPage.module.css';
 import useImageSlider from '../hooks/useImageSlider';
 import BackToCatalogLink from '../components/BackToCatalogLink';
 
+
 export default function ProductDetailPage() {
-  // Obtenemos el código del producto desde la URL (ej: /product/JM001)
+  // obtenemos el code del prod en la url
   const { code } = useParams();
-  // Buscamos el producto que coincida con el código en la URL
+  // Buscamos el producto en la data que ya esta en memoria
   const product = products.find(p => p.code === code);
 
-  // Obtenemos la fn para agregar productos al carrito
   const { addItem } = useCart();
 
   // Si no encontramos el producto
@@ -27,13 +23,12 @@ export default function ProductDetailPage() {
     return (
       <div className={styles.productoDetalleContainer}>
         <h2>producto no encontrado</h2>
-        {/* Enlace para volver al catálogo */}
         <BackToCatalogLink />
       </div>
     );
   }
 
-  // Extraemos las propiedades del producto para usarlas más fácilmente
+  // props  
   const { name, signature, category, description, price, img } = product;
 
   const { currentIndex, currentImage, prevSlide, nextSlide, jumpToSlide } = useImageSlider(img);
@@ -64,7 +59,7 @@ export default function ProductDetailPage() {
             />
           </div>
           
-          {/* Botón para imagen next */}
+          {/* btn para imagen next */}
           <button className={`${styles.sliderBtn} ${styles.next}`} onClick={nextSlide}>
             <ChevronRight />
           </button>

@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/116</span>
+                <span class='fraction'>0/111</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/116</span>
+                <span class='fraction'>0/111</span>
             </div>
         
             
@@ -174,17 +174,7 @@
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
 <a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a>
-<a name='L117'></a><a href='#L117'>117</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -316,12 +306,10 @@
 <span class="cstat-no" title="statement not covered" >  // Buscamos el producto que coincida con el código en la URL</span>
 <span class="cstat-no" title="statement not covered" >  const product = products.find(p =&gt; p.code === code);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  // Estado para controlar qué imagen se muestra en el slider (empieza en la primera)</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  // Obtenemos la fn para agregar productos al carrito</span>
 <span class="cstat-no" title="statement not covered" >  const { addItem } = useCart();</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  // Si no encontramos el producto, mostramos mensaje de error</span>
+<span class="cstat-no" title="statement not covered" >  // Si no encontramos el producto</span>
 <span class="cstat-no" title="statement not covered" >  if (!product) {</span>
 <span class="cstat-no" title="statement not covered" >    return (</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div className={styles.productoDetalleContainer}&gt;</span>
@@ -347,14 +335,14 @@
 <span class="cstat-no" title="statement not covered" >    &lt;div className={styles.productoDetalleContainer}&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div className={styles.productoDetalle}&gt;</span>
 <span class="cstat-no" title="statement not covered" >        </span>
-<span class="cstat-no" title="statement not covered" >        {/* Sección del slider de imágenes */}</span>
+<span class="cstat-no" title="statement not covered" >        {/* Slider de imgs */}</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div className={styles.productoSlider}&gt;</span>
-<span class="cstat-no" title="statement not covered" >          {/* Botón para imagen anterior */}</span>
+<span class="cstat-no" title="statement not covered" >          {/* btn para imagen anterior */}</span>
 <span class="cstat-no" title="statement not covered" >          &lt;button className={`${styles.sliderBtn} ${styles.prev}`} onClick={prevSlide}&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;ChevronLeft /&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" >          </span>
-<span class="cstat-no" title="statement not covered" >          {/* Contenedor de la imagen principal */}</span>
+<span class="cstat-no" title="statement not covered" >          {/* Contenedor de la img main */}</span>
 <span class="cstat-no" title="statement not covered" >          &lt;div className={styles.sliderContainer}&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;img</span>
 <span class="cstat-no" title="statement not covered" >              src={currentImage}</span>
@@ -363,15 +351,15 @@
 <span class="cstat-no" title="statement not covered" >            /&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >          </span>
-<span class="cstat-no" title="statement not covered" >          {/* Botón para imagen siguiente */}</span>
+<span class="cstat-no" title="statement not covered" >          {/* Botón para imagen next */}</span>
 <span class="cstat-no" title="statement not covered" >          &lt;button className={`${styles.sliderBtn} ${styles.next}`} onClick={nextSlide}&gt;</span>
 <span class="cstat-no" title="statement not covered" >            &lt;ChevronRight /&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/button&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >          {/* Miniaturas - solo se muestran si hay más de 1 imagen */}</span>
+<span class="cstat-no" title="statement not covered" >          {/* Miniaturas - solo se muestran si hay + de 1 img */}</span>
 <span class="cstat-no" title="statement not covered" >          {img.length &gt; 1 &amp;&amp; (</span>
 <span class="cstat-no" title="statement not covered" >            &lt;div className={styles.miniaturasContainer}&gt;</span>
-<span class="cstat-no" title="statement not covered" >              {/* Mapeamos todas las imágenes para crear las miniaturas */}</span>
+<span class="cstat-no" title="statement not covered" >              {/* Mapeamos todas las imgs para crear las miniaturas */}</span>
 <span class="cstat-no" title="statement not covered" >              {img.map((imagenSrc, index) =&gt; (</span>
 <span class="cstat-no" title="statement not covered" >                &lt;img</span>
 <span class="cstat-no" title="statement not covered" >                  key={index}</span>
@@ -386,7 +374,7 @@
 <span class="cstat-no" title="statement not covered" >          )}</span>
 <span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        {/* Sección de información del producto */}</span>
+<span class="cstat-no" title="statement not covered" >        {/* info producto */}</span>
 <span class="cstat-no" title="statement not covered" >        &lt;div className={styles.productoInfo}&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;h2 className={styles.productoTituloDetalle}&gt;{name}&lt;/h2&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;p className={styles.productoMarcaDetalle}&gt;{signature}&lt;/p&gt;</span>
@@ -395,14 +383,11 @@
 <span class="cstat-no" title="statement not covered" >          &lt;p className={styles.productoDescripcion}&gt;{description}&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;p className={styles.productoPrecio}&gt;{PriceFormat(price)}&lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >          {/* Contenedor de botones de acción */}</span>
+<span class="cstat-no" title="statement not covered" >          {/* container de btns action */}</span>
 <span class="cstat-no" title="statement not covered" >          &lt;div className={styles.accionesBotones}&gt;</span>
-<span class="cstat-no" title="statement not covered" >            {/* Botón para agregar al carrito */}</span>
 <span class="cstat-no" title="statement not covered" >            &lt;button className={styles.productoAgregar} id="agregar-detalle" onClick={handleAddToCart}&gt;</span>
 <span class="cstat-no" title="statement not covered" >              &lt;Cart /&gt; agregar al carrito</span>
 <span class="cstat-no" title="statement not covered" >            &lt;/button&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >            {/* Enlace para volver al catálogo */}</span>
 <span class="cstat-no" title="statement not covered" >            &lt;BackToCatalogLink /&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
@@ -418,7 +403,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-12-01T07:36:40.868Z
+                at 2025-12-05T03:11:59.790Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

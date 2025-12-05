@@ -1,77 +1,65 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { PriceFormat } from '../utils/formatter';
 import { Receipt } from 'react-bootstrap-icons';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import styles from './VoucherModal.module.css';
+
+// Importamos los sub-componentes (Composicion)
 import VoucherItemsList from './VoucherItemsList';
 import VoucherTotalSummary from './VoucherTotalSummary';
 import VoucherEmailForm from './VoucherEmailForm';
 import BackToCatalogLink from './BackToCatalogLink';
 
 export default function VoucherModal({ cart, subtotal, discount, cartTotal, onClose }) {
-  // Obtenemos el usuario actual para pre-llenar el email
+  // UX: Pre-llenamos el correo si el usuario ya esta logueado
   const { currentUser } = useAuth();
-  
-  // Estado para el email donde enviar el comprobante
   const [email, setEmail] = useState(currentUser?.email || '');
-  // Estado para controlar si ya se "envió" el email
-  const [isEmailSent, setIsEmailSent] = useState(false);
   
+  // Estado para feedback visual de envío
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const navigate = useNavigate();
 
-  // Generamos la fecha actual formateada en español de Chile
+  // Fecha formateada para Chile (es-CL)
   const fecha = new Date().toLocaleDateString('es-CL', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
+    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
   });
 
-  // Función para simular el envío del comprobante por email
+  // Simulamos el backend de envio de correos
   const handleSimulateEmailSend = (e) => {
-    e.preventDefault(); // Prevenimos el comportamiento por defecto del formulario
+    e.preventDefault();
     
-    // Validamos que el email no esté vacío
     if (email.trim() === '') {
       toast.error("Por favor, ingresa un correo.");
-      return; // Cortamos la ejecución si no hay email
+      return;
     }
     
-    // Simulamos el envío (en un proyecto real aquí iría la llamada a una API)
-    console.log(`Simulando envio de boleta a: ${email}`);
-    setIsEmailSent(true); // Cambiamos el estado para mostrar el mensaje de éxito
+    // Feedback inmediato al usuario
+    console.log(`Simulando envio a: ${email}`);
+    setIsEmailSent(true);
     toast.success("Comprobante enviado (Simulado)!");
   };
 
-  // Función para cerrar el modal y volver al catálogo
   const handleCloseAndNavigate = () => {
-    onClose(); // Cerramos el modal (llamando a la función del padre)
-    navigate('/products'); // Navegamos al catálogo de productos
+    onClose(); 
+    navigate('/products'); // Redireccion final
   };
 
   return (
-    // Overlay oscuro que cubre toda la pantalla
     <div className={styles.voucherSimple}>
-      {/* Contenedor principal del modal */}
       <div className={styles.voucherContent}>
         <h3><Receipt /> compra realizada</h3>
         
-        {/* Detalles de la compra */}
         <div className={styles.voucherDetails}>
           <p><strong>fecha:</strong> <span>{fecha}</span></p>
           
-          {/* Lista de productos comprados */}
+          {/* COMPOSICIoN: Delegamos la lista y el resumen a componentes hijos */}
           <VoucherItemsList cart={cart} />
-          
-          {/* Resumen de totales */}
           <VoucherTotalSummary subtotal={subtotal} discount={discount} cartTotal={cartTotal} />
         </div>
 
-        {/* Formulario para "enviar" el comprobante por email */}
+        {/* Componente aislado para el formulario de email */}
         <VoucherEmailForm
           isEmailSent={isEmailSent}
           email={email}
@@ -79,9 +67,7 @@ export default function VoucherModal({ cart, subtotal, discount, cartTotal, onCl
           onSubmit={handleSimulateEmailSend}
         />
 
-        {/* Botones de acción del modal */}
         <div className={styles.voucherActions}>
-          {/* Botón para volver al catálogo */}
           <BackToCatalogLink onClick={handleCloseAndNavigate} />
         </div>
       </div>

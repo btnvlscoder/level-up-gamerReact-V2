@@ -13,11 +13,13 @@ export default function ProductsPage() {
   useEffect(() => {
     let active = true; //Evita Memory Leaks si el usuario cambia de página rápido
     getProducts()
-      .then((res) => { if (active) setData(res); })//Solo actualiza si el componente vive
-      .catch(() => { if (active) setData([]); });
+    //preguntamos si esta activo
+      .then((res) => { if (active) setData(res); }) 
+      .catch(() => { if (active) setData([]); });//Solo actualiza si el componente vive
     return () => { active = false; }; //Desactiva el flag al desmontar el componente
   }, []);
 
+  //ejecutamos custom hook 
   const {
     categoria,
     setCategoria,
