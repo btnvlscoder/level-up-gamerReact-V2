@@ -9,12 +9,13 @@ import { getProducts } from '../services/productService';
 export default function ProductsPage() {
   const [data, setData] = useState([]);
 
+// useEffect para la carga inicial
   useEffect(() => {
-    let active = true;
+    let active = true; //Evita Memory Leaks si el usuario cambia de página rápido
     getProducts()
-      .then((res) => { if (active) setData(res); })
+      .then((res) => { if (active) setData(res); })//Solo actualiza si el componente vive
       .catch(() => { if (active) setData([]); });
-    return () => { active = false; };
+    return () => { active = false; }; //Desactiva el flag al desmontar el componente
   }, []);
 
   const {

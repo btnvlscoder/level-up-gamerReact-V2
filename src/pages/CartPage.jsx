@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 
-// Importamos el contexto del carrito para manejar los productos
 import { useCart } from '../context/CartContext';
-// Importamos la fn para formatear precios
-
-// Importamos íconos de Bootstrap
 import { EmojiFrown } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
-// Importamos el modal del voucher que se muestra después de comprar
 import VoucherModal from '../components/VoucherModal';
-// Importamos el contexto de autenticación para verificar si el usuario está logueado
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
-// Importamos los estilos específicos de esta página
 import styles from './CartPage.module.css';
 import CartItem from '../components/CartItem';
 import CartSummary from '../components/CartSummary';

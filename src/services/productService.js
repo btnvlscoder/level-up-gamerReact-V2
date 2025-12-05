@@ -1,22 +1,23 @@
 import localProducts from '../data/products';
 
+// normalizacion de datos para el match con backend
 const normalize = (s) => (typeof s === 'string' ? s.trim().toLowerCase() : '');
 
 // ASYNC para manejar la promesa sin bloquear el hilo principal
 export async function getProducts() {
   let backendProducts = [];
   
-  // Si el backend falla, el catch evita la pantalla blanca
+  // conexion al backend
   try {
     const res = await fetch('http://localhost:8080/products');
     const data = await res.json();
     backendProducts = Array.isArray(data) ? data : [];
   } catch {}
 
-  // Creo un mapa local para enriquecer los datos del servidor
+  // diccionario local normalizado para el match  
   const localByName = new Map(localProducts.map(p => [normalize(p.name), p]));
 
-  // Si el backend no trae foto, inyecto una por defecto aqui
+  // match con backend
   return backendProducts.map((b) => {
     const match = localByName.get(normalize(b.name));
     const img = match?.img && match.img.length ? match.img : ['/img/placeholder.jpg'];

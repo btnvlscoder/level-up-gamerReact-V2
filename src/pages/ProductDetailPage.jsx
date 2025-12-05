@@ -19,12 +19,10 @@ export default function ProductDetailPage() {
   // Buscamos el producto que coincida con el código en la URL
   const product = products.find(p => p.code === code);
 
-  // Estado para controlar qué imagen se muestra en el slider (empieza en la primera)
-
   // Obtenemos la fn para agregar productos al carrito
   const { addItem } = useCart();
 
-  // Si no encontramos el producto, mostramos mensaje de error
+  // Si no encontramos el producto
   if (!product) {
     return (
       <div className={styles.productoDetalleContainer}>
@@ -50,14 +48,14 @@ export default function ProductDetailPage() {
     <div className={styles.productoDetalleContainer}>
       <div className={styles.productoDetalle}>
         
-        {/* Sección del slider de imágenes */}
+        {/* Slider de imgs */}
         <div className={styles.productoSlider}>
-          {/* Botón para imagen anterior */}
+          {/* btn para imagen anterior */}
           <button className={`${styles.sliderBtn} ${styles.prev}`} onClick={prevSlide}>
             <ChevronLeft />
           </button>
           
-          {/* Contenedor de la imagen principal */}
+          {/* Contenedor de la img main */}
           <div className={styles.sliderContainer}>
             <img
               src={currentImage}
@@ -66,15 +64,15 @@ export default function ProductDetailPage() {
             />
           </div>
           
-          {/* Botón para imagen siguiente */}
+          {/* Botón para imagen next */}
           <button className={`${styles.sliderBtn} ${styles.next}`} onClick={nextSlide}>
             <ChevronRight />
           </button>
 
-          {/* Miniaturas - solo se muestran si hay más de 1 imagen */}
+          {/* Miniaturas - solo se muestran si hay + de 1 img */}
           {img.length > 1 && (
             <div className={styles.miniaturasContainer}>
-              {/* Mapeamos todas las imágenes para crear las miniaturas */}
+              {/* Mapeamos todas las imgs para crear las miniaturas */}
               {img.map((imagenSrc, index) => (
                 <img
                   key={index}
@@ -89,7 +87,7 @@ export default function ProductDetailPage() {
           )}
         </div>
 
-        {/* Sección de información del producto */}
+        {/* info producto */}
         <div className={styles.productoInfo}>
           <h2 className={styles.productoTituloDetalle}>{name}</h2>
           <p className={styles.productoMarcaDetalle}>{signature}</p>
@@ -98,14 +96,11 @@ export default function ProductDetailPage() {
           <p className={styles.productoDescripcion}>{description}</p>
           <p className={styles.productoPrecio}>{PriceFormat(price)}</p>
 
-          {/* Contenedor de botones de acción */}
+          {/* container de btns action */}
           <div className={styles.accionesBotones}>
-            {/* Botón para agregar al carrito */}
             <button className={styles.productoAgregar} id="agregar-detalle" onClick={handleAddToCart}>
               <Cart /> agregar al carrito
             </button>
-
-            {/* Enlace para volver al catálogo */}
             <BackToCatalogLink />
           </div>
         </div>
